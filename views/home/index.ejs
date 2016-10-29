@@ -1,0 +1,22 @@
+	<h1>Bienvenido a 8enlinea</h1>
+
+	<h2>Su estado ahora es: <%= req.session.authenticated || "usuario nuevo" %></h2>
+
+	<div class="conversation pane">
+		<ul class="conversation-messages">
+			<% for(var i=0; i<data.mensajes.length; i++) {%>
+			 <li class="conversation-message"><%= data.mensajes[i].text %></li>
+			<% } %>
+		</ul>
+	</div>
+
+	<div class="conversation-input pane">
+		<h3>Sus opciones de respuesta:</h3>
+		<ul>
+			<% if( data.opciones.length > 0 ) { for(var i=0; i<data.opciones.length; i++) {%>
+				<li class="conversation-option"><%= data.opciones[i].text %></li>
+			<% } }else{ %>
+				<li class="no-options">No hay opciones</li>
+			<% } %>
+		</ul>
+	</div>
