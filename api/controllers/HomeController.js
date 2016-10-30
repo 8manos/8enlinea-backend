@@ -18,7 +18,7 @@ module.exports = {
       data.mensajes = mensajes;
       data.opciones = new Object();
       sails.log('Rendering home');
-      res.view({ title: "Bienvenido a 8enlinea", data });
+      res.json({ data });
     });
   },
 
