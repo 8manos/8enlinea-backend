@@ -15,6 +15,10 @@ module.exports = {
   	de_usuario: {
   		collection: 'user',
   		via: 'conversaciones'
+  	},
+  	usuarios: {
+  		collection: 'user',
+  		via: 'en_conversacion'
   	}
   }
 };

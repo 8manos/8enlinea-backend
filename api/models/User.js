@@ -16,6 +16,10 @@ _.merge(exports, {
     mensajes: {
     	collection: 'mensaje',
     	via: 'autor'
+    },
+    en_conversacion: {
+    	collection: 'conversacion',
+    	via: 'usuarios'
     }
   }
 });
