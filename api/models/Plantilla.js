@@ -31,9 +31,12 @@ module.exports = {
   		defaultsTo: 10000
   	},
   	respuestas: {
-  		type: 'array'
+  		collection: 'respuesta',
+  		via: 'de_plantilla'
+  	},
+  	detonador: {
+  		collection: 'respuesta',
+  		via: 'destino'
   	}
   }
-
 };
-

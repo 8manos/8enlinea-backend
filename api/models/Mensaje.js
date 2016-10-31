@@ -32,6 +32,10 @@ module.exports = {
   	autor:{
       model:'user',
       unique: true
+    },
+    acciones:{
+      model: 'accion',
+      via: 'en_mensaje'
     }
   }
 
