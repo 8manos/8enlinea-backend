@@ -39,6 +39,11 @@ module.exports.routes = {
   '/intro': {
     controller: 'home',
     action: 'subscribeToIntro'
+  },
+
+  '/admin': {
+    controller: 'admin',
+    action: 'home'
   }
 
   /***************************************************************************
