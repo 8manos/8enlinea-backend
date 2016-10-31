@@ -30,7 +30,7 @@ module.exports = {
 
     sails.log('My socket ID is: ' + socketId);
 
-    if( req.session.authenticated == "undefined" ){
+    if( req.session.authenticate == "undefined" ){
       timed = setTimeout( function () {
         sails.sockets.broadcast( socketId, { greeting: 'Parece que aún no nos conocemos, quieres iniciar sesión?', socketId: socketId });
       }, 3000);
