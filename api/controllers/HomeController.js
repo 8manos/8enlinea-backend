@@ -30,13 +30,13 @@ module.exports = {
 
     sails.log('My socket ID is: ' + socketId);
 
-    if( req.session.authenticated !== "undefined" ){
+    if( == "undefined" ){
       timed = setTimeout( function () {
-        sails.sockets.broadcast( socketId, { greeting: req.session.authenticate + 'Hola persona nueva 3 segundos despues!', socketId: socketId });
+        sails.sockets.broadcast( socketId, { greeting: 'Parece que aún no nos conocemos, quieres iniciar sesión?', socketId: socketId });
       }, 3000);
     }else{
       timed = setTimeout( function () {
-        sails.sockets.broadcast( socketId, { greeting: req.session.authenticate + 'Hola persona conocida 3 segundos despues!', socketId: socketId });
+        sails.sockets.broadcast( socketId, { greeting: 'Parece que ya nos conocemos, espera mientras cargamos tus conversaciones', socketId: socketId });
       }, 3000);
     }
 
