@@ -11,11 +11,11 @@ module.exports = {
    * `AdminController.home()`
    */
   home: function (req, res) {
-    return res.json({
-      todo: 'home() is not implemented yet!'
-    });
+    if (req.isSocket) {
+      return res.badRequest();
+    }
+    return res.view();
   },
-
 
   /**
    * `AdminController.usuarios()`
