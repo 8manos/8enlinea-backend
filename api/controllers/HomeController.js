@@ -32,11 +32,11 @@ module.exports = {
 
     if( req.session.authenticated ){
       timed = setTimeout( function () {
-        sails.sockets.broadcast( socketId, { greeting: 'Hola persona nueva 3 segundos despues!', socketId: socketId });
+        sails.sockets.broadcast( socketId, { greeting: req.session.authenticate + 'Hola persona nueva 3 segundos despues!', socketId: socketId });
       }, 3000);
     }else{
       timed = setTimeout( function () {
-        sails.sockets.broadcast( socketId, { greeting: 'Hola persona conocida 3 segundos despues!', socketId: socketId });
+        sails.sockets.broadcast( socketId, { greeting: req.session.authenticate + 'Hola persona conocida 3 segundos despues!', socketId: socketId });
       }, 3000);
     }
 
