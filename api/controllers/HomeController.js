@@ -31,14 +31,14 @@ module.exports = {
     sails.log('My socket ID is: ' + socketId);
 
     sails.log("Sesion: ", req.session.authenticated );
-    
-    if( req.session.authenticated == "undefined" ){
+
+    if( req.session.authenticated ){
       timed = setTimeout( function () {
-        sails.sockets.broadcast( socketId, { greeting: 'Parece que aún no nos conocemos, quieres iniciar sesión?', socketId: socketId });
+        sails.sockets.broadcast( socketId, { greeting: 'Parece que ya nos conocemos, espera mientras cargamos tus conversaciones', socketId: socketId });
       }, 3000);
     }else{
       timed = setTimeout( function () {
-        sails.sockets.broadcast( socketId, { greeting: 'Parece que ya nos conocemos, espera mientras cargamos tus conversaciones', socketId: socketId });
+        sails.sockets.broadcast( socketId, { greeting: 'Parece que aún no nos conocemos, quieres iniciar sesión?', socketId: socketId });
       }, 3000);
     }
 
