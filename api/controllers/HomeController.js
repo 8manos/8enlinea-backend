@@ -17,7 +17,6 @@ module.exports = {
       var data = new Object();
       data.mensajes = mensajes;
       data.opciones = new Object();
-      sails.log('Rendering home');
       res.json({ data });
     });
   },
@@ -31,9 +30,15 @@ module.exports = {
 
     sails.log('My socket ID is: ' + socketId);
 
-    timed = setTimeout( function () {
-      sails.sockets.broadcast( socketId, { greeting: 'Hola 30 segundos despues!', socketId: socketId });
-    }, 30000);
+    if( req.session.authenticated ){
+      timed = setTimeout( function () {
+        sails.sockets.broadcast( socketId, { greeting: 'Hola persona nueva 3 segundos despues!', socketId: socketId });
+      }, 3000);
+    }else{
+      timed = setTimeout( function () {
+        sails.sockets.broadcast( socketId, { greeting: 'Hola persona conocida 3 segundos despues!', socketId: socketId });
+      }, 3000);
+    }
 
     return res.json(socketId);
   }
