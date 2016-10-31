@@ -8,6 +8,11 @@
 module.exports = {
 
   attributes: {
+  	identificador: {
+  		type: 'string',
+  		required: true,
+  		unique: true
+  	},
   	mensaje: {
   		type: 'longtext',
   		required: true
@@ -15,7 +20,7 @@ module.exports = {
   	estado: {
   		type: 'string',
   		defaultsTo: 'escribiendo',
-      enum: ['pendiente', 'escribiendo', 'enviado', 'leido', 'respondido']
+  		enum: ['pendiente', 'escribiendo', 'enviado', 'leido', 'respondido']
   	},
   	tiempo_escribiendo: {
   		type: 'integer',
@@ -25,14 +30,9 @@ module.exports = {
   		type: 'integer',
   		defaultsTo: 10000
   	},
-  	en_conversacion: {
-  		collection: 'conversacion',
-  		via: 'mensajes'
-  	},
-  	autor:{
-      model:'user',
-      unique: true
-    }
+  	respuestas: {
+  		type: 'array'
+  	}
   }
 
 };
