@@ -1,27 +1,46 @@
 <%- include partials/header.ejs %>
 
-<div class="breadcrumb">
+<div class="breadcrumb clearfix">
 	<a href="/admin">Admin</a> / <a href="/admin/usuarios"><%= __('Usuarios') %></a>	
+	<a id="toggle-form" href="#" class="btn btn-primary navbar-btn"><%= __('Agregar nuevo usuario') %></a>
 </div>
 
-<section id="admin-form" class="user_new">
+<section id="admin-form" class="panel user_new">
 	<h2><%= __('Agregar nuevo usuario') %></h2>
-	<form>
-		<label for="name"><%= __('Nombre') %>:</label>
-		<input type="text" name="name" id="name">
 
-		<label for="email"><%= __('Email') %>:</label>
-		<input type="email" name="email" id="email">
+	<form method="POST" action="/user" id="form_user_new" class="ajax-form">
+		<div class="form-group">
+			<label for="username"><%= __('Nombre de usuario') %>:</label>
+			<input class="form-control" type="text" name="username" id="username" required>
+		</div>
 
-		<input type="submit" name="submit" value="<%= __('Agregar') %>">
+		<div class="form-group">
+			<label for="name"><%= __('Nombre completo') %>:</label>
+			<input class="form-control" type="text" name="name" id="name" required>
+		</div>
+
+		<div class="form-group">
+			<label for="email"><%= __('Email') %>:</label>
+			<input class="form-control" type="email" name="email" id="email" required>
+		</div>
+
+		<div class="form-group">
+			<label for="password"><%= __('Clave') %>:</label>
+			<input class="form-control" type="password" name="password" id="password" required>
+		</div>
+
+		<div class="form-group">
+			<input class="btn btn-primary" type="submit" name="submit" value="<%= __('Agregar') %>">
+		</div>
 	</form>
 </section>
 
 <section id="admin-content" class="usuarios">
-	<table>
+	<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
 				<td><input type="checkbox" name="select_all"></td>
+				<td><%= __('Usuario') %></td>
 				<td><%= __('Nombre') %></td>
 				<td><%= __('Email') %></td>
 				<td><%= __('Status') %></td>
@@ -34,12 +53,13 @@
 			<% for(var i=0; i<data.usuarios.length; i++) { %>
 				<tr>
 					<td><input type="checkbox" name="<%= data.usuarios[i].id %>"></td>
+					<td><%= data.usuarios[i].username %></td>
 					<td><%= data.usuarios[i].name %></td>
 					<td><%= data.usuarios[i].email %></td>
-					<td><%= data.usuarios[i].status %></td>
-					<td><%= data.usuarios[i].conteo_mensajes %></td>
-					<td><%= data.usuarios[i].conteo_fotos %></td>
-					<td><%= data.usuarios[i].conteo_conversaciones %></td>
+					<td><%= data.usuarios[i].status || req.__('Sin estado') %></td>
+					<td><%= data.usuarios[i].conteo_mensajes || '0' %></td>
+					<td><%= data.usuarios[i].conteo_fotos || '0' %></td>
+					<td><%= data.usuarios[i].conteo_conversaciones || '0' %></td>
 				</tr>
 			<% } %>
 		</tbody>

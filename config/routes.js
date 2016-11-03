@@ -44,6 +44,11 @@ module.exports.routes = {
   '/admin': {
     controller: 'admin',
     action: 'home'
+  },
+
+  '/login': {
+    controller: 'home',
+    action: 'login'
   }
 
   /***************************************************************************

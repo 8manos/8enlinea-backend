@@ -19,6 +19,10 @@ module.exports = {
     });
   },
 
+  login: function(req, res) {
+    res.view('403');
+  },
+
   subscribeToIntro: function(req, res) {
     if (!req.isSocket) {
       return res.badRequest();

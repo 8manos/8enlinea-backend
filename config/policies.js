@@ -71,6 +71,21 @@ module.exports.policies = {
   HomeController: {
     'index': true,
     'subscribeToIntro': true
+  },
+
+  AdminController: {
+    '*':[
+    'basicAuth',
+    'passport',
+    'sessionAuth',
+    'ModelPolicy',
+    'AuditPolicy',
+    'OwnerPolicy',
+    'PermissionPolicy',
+    'RolePolicy',
+    'CriteriaPolicy', 
+    'isAdmin'
+  ]
   }
-  
+
 };

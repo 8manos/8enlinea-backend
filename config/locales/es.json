@@ -9,5 +9,10 @@
 	"Status": "Status",
 	"Mensajes": "Mensajes",
 	"Fotos": "Fotos",
-	"Conversaciones": "Conversaciones"
+	"Conversaciones": "Conversaciones",
+	"Nombre de usuario": "Nombre de usuario",
+	"Clave": "Clave",
+	"Sin estado": "Sin estado",
+	"Nombre completo": "Nombre completo",
+	"Usuario": "Usuario"
 }
