@@ -1,4 +1,13 @@
 {
-  "Welcome": "Bienvenido",
-  "A brand new app.": "Una nueva aplicación."
+	"Welcome": "Bienvenido",
+	"A brand new app.": "Una nueva aplicación.",
+	"Nombre": "Nombre",
+	"Email": "Email",
+	"Usuarios": "Usuarios",
+	"Agregar nuevo usuario": "Agregar nuevo usuario",
+	"Agregar": "Agregar",
+	"Status": "Status",
+	"Mensajes": "Mensajes",
+	"Fotos": "Fotos",
+	"Conversaciones": "Conversaciones"
 }

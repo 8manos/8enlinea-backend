@@ -1,11 +1,11 @@
 <%- include partials/header.ejs %>
 
 <div class="breadcrumb">
-	<a href="/admin">Admin</a> / <a href="/admin/usuarios">Usuarios</a>	
+	<a href="/admin">Admin</a> / <a href="/admin/usuarios"><%= __('Usuarios') %></a>	
 </div>
 
 <section id="admin-form" class="user_new">
-	<h2>Agregar nuevo usuario</h2>
+	<h2><%= __('Agregar nuevo usuario') %></h2>
 	<form>
 		<label for="name"><%= __('Nombre') %>:</label>
 		<input type="text" name="name" id="name">
@@ -13,7 +13,7 @@
 		<label for="email"><%= __('Email') %>:</label>
 		<input type="email" name="email" id="email">
 
-		<input type="submit" name="submit" value="Agregar">
+		<input type="submit" name="submit" value="<%= __('Agregar') %>">
 	</form>
 </section>
 
@@ -22,12 +22,12 @@
 		<thead>
 			<tr>
 				<td><input type="checkbox" name="select_all"></td>
-				<td>Nombre</td>
-				<td>E-Mail</td>
-				<td>Status</td>
-				<td>Mensajes</td>
-				<td>Fotos</td>
-				<td>Conversaciones</td>
+				<td><%= __('Nombre') %></td>
+				<td><%= __('Email') %></td>
+				<td><%= __('Status') %></td>
+				<td><%= __('Mensajes') %></td>
+				<td><%= __('Fotos') %></td>
+				<td><%= __('Conversaciones') %></td>
 			</tr>
 		</thead>
 		<tbody>
