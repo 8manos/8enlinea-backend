@@ -9,6 +9,9 @@ _.merge(exports, {
     name: {
     	type: 'string'
     },
+    status: {
+        type: 'string'
+    },
     conversaciones: {
     	collection: 'conversacion',
     	via: 'de_usuario'
@@ -20,6 +23,18 @@ _.merge(exports, {
     en_conversacion: {
     	collection: 'conversacion',
     	via: 'usuarios'
+    },
+    conteo_mensajes: {
+        type: 'integer',
+        default: 0
+    },
+    conteo_conversaciones: {
+        type: 'integer',
+        default: 0
+    },
+    conteo_fotos: {
+        type: 'integer',
+        default: 0
     }
   }
 });

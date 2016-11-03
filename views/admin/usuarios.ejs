@@ -1,0 +1,47 @@
+<%- include partials/header.ejs %>
+
+<div class="breadcrumb">
+	<a href="/admin">Admin</a> / <a href="/admin/usuarios">Usuarios</a>	
+</div>
+
+<section id="admin-form" class="user_new">
+	<h2>Agregar nuevo usuario</h2>
+	<form>
+		<label for="name"><%= __('Nombre') %>:</label>
+		<input type="text" name="name" id="name">
+
+		<label for="email"><%= __('Email') %>:</label>
+		<input type="email" name="email" id="email">
+
+		<input type="submit" name="submit" value="Agregar">
+	</form>
+</section>
+
+<section id="admin-content" class="usuarios">
+	<table>
+		<thead>
+			<tr>
+				<td><input type="checkbox" name="select_all"></td>
+				<td>Nombre</td>
+				<td>E-Mail</td>
+				<td>Status</td>
+				<td>Mensajes</td>
+				<td>Fotos</td>
+				<td>Conversaciones</td>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(var i=0; i<data.usuarios.length; i++) { %>
+				<tr>
+					<td><input type="checkbox" name="<%= data.usuarios[i].id %>"></td>
+					<td><%= data.usuarios[i].name %></td>
+					<td><%= data.usuarios[i].email %></td>
+					<td><%= data.usuarios[i].status %></td>
+					<td><%= data.usuarios[i].conteo_mensajes %></td>
+					<td><%= data.usuarios[i].conteo_fotos %></td>
+					<td><%= data.usuarios[i].conteo_conversaciones %></td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+</section>

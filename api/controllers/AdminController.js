@@ -21,11 +21,15 @@ module.exports = {
    * `AdminController.usuarios()`
    */
   usuarios: function (req, res) {
-    return res.json({
-      todo: 'usuarios() is not implemented yet!'
+    if (req.isSocket) {
+      return res.badRequest();
+    }
+    User.find().exec(function(err, usuarios) {
+      var data = new Object();
+      data.usuarios = usuarios;
+      res.view({ data });
     });
   },
-
 
   /**
    * `AdminController.plantillas()`
