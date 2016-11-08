@@ -1,0 +1,41 @@
+<div class="modal fade" id="modal_respuesta" tabindex="-1" role="dialog" aria-labelledby="modal_respuestaLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal_respuestaLabel"><%= __('Nueva respuesta') %></h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="ajax-form" action="/respuesta" method="POST">
+          <input type="hidden" id="de_plantilla" name="de_plantilla">
+
+          <div class="form-group">
+            <label for="tipo"><%= __('Tipo') %></label>
+            <select name="tipo" id="tipo" class="form-control">
+              <option value="texto"><%= __('Texto') %></option>
+              <option value="input"><%= __('Input') %></option>
+              <option value="radio"><%= __('Radio') %></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="texto" class="control-label"><%= __('Texto') %></label>
+            <textarea class="form-control" id="texto" name="texto" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="destino" class="control-label"><%= __('Destino') %></label>
+            <input type="text" class="form-control" id="destino" name="destino" placeholder="ej: saludo_1">
+          </div>
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" value="Send message">
+        </form>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,5 +14,19 @@
 	"Clave": "Clave",
 	"Sin estado": "Sin estado",
 	"Nombre completo": "Nombre completo",
-	"Usuario": "Usuario"
+	"Usuario": "Usuario",
+	"Plantillas": "Plantillas",
+	"Agregar nueva plantilla": "Agregar nueva plantilla",
+	"Identificador": "Identificador",
+	"Mensaje": "Mensaje",
+	"Tiempo Escribiendo": "Tiempo Escribiendo",
+	"Tiempo hasta respuesta": "Tiempo hasta respuesta",
+	"Respuestas": "Respuestas",
+	"Tiempo escribiendo": "Tiempo escribiendo",
+	"Nueva respuesta": "Nueva respuesta",
+	"Tipo": "Tipo",
+	"Texto": "Texto",
+	"Input": "Input",
+	"Radio": "Radio",
+	"Destino": "Destino"
 }

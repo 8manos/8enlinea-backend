@@ -35,8 +35,13 @@ module.exports = {
    * `AdminController.plantillas()`
    */
   plantillas: function (req, res) {
-    return res.json({
-      todo: 'plantillas() is not implemented yet!'
+    if (req.isSocket) {
+      return res.badRequest();
+    }
+    Plantilla.find().exec(function(err, plantillas) {
+      var data = new Object();
+      data.plantillas = plantillas;
+      res.view({ data });
     });
   }
 };

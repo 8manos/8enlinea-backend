@@ -1,0 +1,69 @@
+<%- include partials/modal-respuesta.ejs %>
+<%- include partials/header.ejs %>
+
+<div class="breadcrumb clearfix">
+	<a href="/admin">Admin</a> / <a href="/admin/plantillas"><%= __('Plantillas') %></a>	
+	<a id="toggle-form" href="#" class="btn btn-primary navbar-btn"><%= __('Agregar nueva plantilla') %></a>
+</div>
+
+<section id="admin-form" class="panel plantilla_new">
+	<h2><%= __('Agregar nueva plantilla') %></h2>
+
+	<form method="POST" action="/plantilla" id="form_plantilla_new" class="ajax-form">
+		<div class="form-group">
+			<label for="identificador"><%= __('Identificador') %></label>
+			<input class="form-control" type="text" name="identificador" id="identificador" required>
+		</div>
+
+		<div class="form-group">
+			<label for="mensaje"><%= __('Mensaje') %></label>
+			<textarea class="form-control" name="mensaje" id="mensaje" required></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="tiempo_escribiendo"><%= __('Tiempo escribiendo') %></label>
+			<input class="form-control" type="number" name="tiempo_escribiendo" id="tiempo_escribiendo" required>
+		</div>
+
+		<div class="form-group">
+			<label for="tiempo_respuesta"><%= __('Tiempo hasta respuesta') %></label>
+			<input class="form-control" type="number" name="tiempo_respuesta" id="tiempo_respuesta" required>
+		</div>
+
+		<div class="form-group">
+			<input class="btn btn-primary" type="submit" name="submit" value="<%= __('Agregar') %>">
+		</div>
+	</form>
+</section>
+
+<section id="admin-content" class="plantillas">
+	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<td><input type="checkbox" name="select_all"></td>
+				<td><%= __('Identificador') %></td>
+				<td><%= __('Mensaje') %></td>
+				<td><%= __('Tiempo Escribiendo') %></td>
+				<td><%= __('Tiempo hasta respuesta') %></td>
+				<td><%= __('Respuestas') %></td>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(var i=0; i<data.plantillas.length; i++) { %>
+				<tr>
+					<td><input type="checkbox" name="<%= data.plantillas[i].id %>"></td>
+					<td><%= data.plantillas[i].identificador %></td>
+					<td><%= data.plantillas[i].mensaje %></td>
+					<td><%= data.plantillas[i].tiempo_escribiendo  %></td>
+					<td><%= data.plantillas[i].tiempo_respuesta %></td>
+					<td>
+						<%= data.plantillas[i].conteo_respuestas || '0' %>
+						<small>
+							(<a href="#" class="nueva_respuesta" data-toggle="modal" data-target="#modal_respuesta" data-id="<%= data.plantillas[i].id %>"><%= __('Agregar') %></a>)
+						</small>
+					</td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+</section>

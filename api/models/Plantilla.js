@@ -30,13 +30,16 @@ module.exports = {
   		type: 'integer',
   		defaultsTo: 10000
   	},
+    conteo_respuestas: {
+      type: 'integer',
+      defaultsTo: 0
+    },
+    mensaje_retorno: {
+      type: 'string'
+    },
   	respuestas: {
   		collection: 'respuesta',
   		via: 'de_plantilla'
-  	},
-  	detonador: {
-  		collection: 'respuesta',
-  		via: 'destino'
   	}
   }
 };
