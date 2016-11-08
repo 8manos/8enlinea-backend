@@ -12,8 +12,8 @@ module.exports = {
   		collection: 'mensaje',
   		via: 'en_conversacion'
   	},
-    respuestas_alternativas :{
-      collection: 'alternativas',
+    alternativas :{
+      collection: 'alternativa',
       via: 'en_conversacion'
     },
   	de_usuario: {
