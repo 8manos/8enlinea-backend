@@ -22,6 +22,9 @@ module.exports = {
   		defaultsTo: 'escribiendo',
   		enum: ['pendiente', 'escribiendo', 'enviado', 'leido', 'respondido']
   	},
+    multimedia: {
+      type: 'string'
+    }, 
   	tiempo_escribiendo: {
   		type: 'integer',
   		defaultsTo: 5000

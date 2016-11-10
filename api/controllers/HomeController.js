@@ -44,7 +44,16 @@ module.exports = {
       }, 3000);
     }
 
-    return res.json(socketId);
+    Plantilla.find({ identificador:'saludo_1' }).populate('respuestas').exec(function (err, plantilla){
+      if (err) {
+        return res.serverError(err);
+      }
+      timed2 = setTimeout( function () {
+        sails.log('emitiendo plantilla');
+        sails.sockets.broadcast( socketId, { plantilla: plantilla[0], socketId: socketId });
+      }, 5000);
+      return res.json(plantilla);
+    });
   }
 
 };

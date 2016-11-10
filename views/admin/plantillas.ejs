@@ -21,6 +21,16 @@
 		</div>
 
 		<div class="form-group">
+			<label for="multimedia"><%= __('Multimedia') %></label>
+			<textarea class="form-control" name="multimedia" id="multimedia"></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="mensaje_retorno"><%= __('Mensaje de retorno') %></label>
+			<textarea class="form-control" name="mensaje_retorno" id="mensaje_retorno"></textarea>
+		</div>
+
+		<div class="form-group">
 			<label for="tiempo_escribiendo"><%= __('Tiempo escribiendo') %></label>
 			<input class="form-control" type="number" name="tiempo_escribiendo" id="tiempo_escribiendo" required>
 		</div>
@@ -43,6 +53,8 @@
 				<td><input type="checkbox" name="select_all"></td>
 				<td><%= __('Identificador') %></td>
 				<td><%= __('Mensaje') %></td>
+				<td><%= __('URL Multimedia') %></td>
+				<td><%= __('Mensaje de retorno') %></td>
 				<td><%= __('Tiempo Escribiendo') %></td>
 				<td><%= __('Tiempo hasta respuesta') %></td>
 				<td><%= __('Respuestas') %></td>
@@ -54,12 +66,14 @@
 					<td><input type="checkbox" name="<%= data.plantillas[i].id %>"></td>
 					<td><%= data.plantillas[i].identificador %></td>
 					<td><%= data.plantillas[i].mensaje %></td>
+					<td><%= data.plantillas[i].multimedia || "no definido" %></td>
+					<td><%= data.plantillas[i].mensaje_retorno || "no definido" %></td>
 					<td><%= data.plantillas[i].tiempo_escribiendo  %></td>
 					<td><%= data.plantillas[i].tiempo_respuesta %></td>
 					<td>
 						<%= data.plantillas[i].conteo_respuestas || '0' %>
 						<small>
-							(<a href="#" class="nueva_respuesta" data-toggle="modal" data-target="#modal_respuesta" data-id="<%= data.plantillas[i].id %>"><%= __('Agregar') %></a>)
+							(<a href="#" class="nueva_respuesta" data-toggle="modal" data-target="#modal_respuesta" data-id="<%= data.plantillas[i].id %>"><%= __('Agregar') %></a> / <a href="#" class="ver_respuestas" data-toggle="modal" data-target="#modal_ver_respuestas" data-id="<%= data.plantillas[i].id %>"><%= __('Ver') %></a>)
 						</small>
 					</td>
 				</tr>

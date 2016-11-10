@@ -39,4 +39,28 @@
 		modal.find('.modal-title').text('Nueva respuesta en plantilla: ' + id);
 		modal.find('#de_plantilla').val(id);
 	})
+
+	// Traer respuestas asociadas a plantilla en modal
+	$("#modal_ver_respuestas").on("show.bs.modal", function(e) {
+		var modal = $(this);
+		var button = $(e.relatedTarget);
+		var id = button.data('id');
+		var body = $(this).find(".modal-body");
+		var content = '';
+
+		modal.find('.modal-title').text('Respuestas en plantilla: ' + id );
+
+		$.ajax({
+			url: "/plantilla/"+ id +"/respuestas"
+		}).done(function( data ) {
+			body.text('');
+			content += '<table class="table table-striped table-bordered table-hover"><thead><tr><td>Tipo</td><td>Texto</td><td>Destino</td></tr></thead><tbody>';
+			$.each( data , function( i, item ){
+				content += '<tr><td>'+ data[i].tipo +'</td><td>'+ data[i].texto +'</td><td>'+ data[i].destino +'</td></tr>';
+			});
+			content += '</tbody></table>';
+			body.append( content );
+			body.addClass( "done" );
+		});		
+	});
 }));

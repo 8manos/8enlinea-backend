@@ -67,6 +67,10 @@ module.exports.policies = {
     '*': false,
     'create' : true
   },
+  PlantillaController: {
+    '*': false,
+    'findOne' : true
+  },
 
   HomeController: {
     'index': true,

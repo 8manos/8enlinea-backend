@@ -25,6 +25,9 @@ module.exports = {
   		type: 'integer',
   		defaultsTo: 10000
   	},
+    multimedia: {
+      type: 'string'
+    }, 
   	en_conversacion: {
   		collection: 'conversacion',
   		via: 'mensajes'
