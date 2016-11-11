@@ -69,6 +69,18 @@ module.exports.policies = {
   },
   PlantillaController: {
     '*': false,
+    'create': [
+      'basicAuth',
+      'passport',
+      'sessionAuth',
+      'ModelPolicy',
+      'AuditPolicy',
+      'OwnerPolicy',
+      'PermissionPolicy',
+      'RolePolicy',
+      'CriteriaPolicy', 
+      'isAdmin'
+    ],
     'findOne' : true
   },
 
