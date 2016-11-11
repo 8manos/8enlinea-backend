@@ -41,10 +41,11 @@ module.exports = {
     Plantilla.find().populate('autor').exec(function(err, plantillas) {
       var data = new Object();
       data.plantillas = plantillas;
-      User.find().exec(function(err,usuarios)){
+      User.find().exec(function(err,usuarios){
         data.usuarios = usuarios;
+        console.log('Sending: ', data );
         res.view({ data });
-      }
+      });
     });
   }
 };

@@ -42,7 +42,7 @@
 
 		<div class="form-group">
 			<label for="autor"><%= __('Autor') %></label>
-			<select id="autor" class="form-control">
+			<select id="autor" class="form-control" name="autor">
 				<% for(var i=0; i<data.usuarios.length; i++) { %>
 					<option value="<%= data.usuarios[i].id %>"><%= data.usuarios[i].username %></option>
 				<% } %>
@@ -80,7 +80,7 @@
 					<td><%= data.plantillas[i].mensaje_retorno || "no definido" %></td>
 					<td><%= data.plantillas[i].tiempo_escribiendo  %></td>
 					<td><%= data.plantillas[i].tiempo_respuesta %></td>
-					<td><%= data.plantillas[i].autor.username %></td>
+					<td><%= data.plantillas[i].autor.username || "sin autor" %></td>
 					<td>
 						<%= data.plantillas[i].conteo_respuestas || '0' %>
 						<small>
