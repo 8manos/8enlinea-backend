@@ -41,6 +41,15 @@
 		</div>
 
 		<div class="form-group">
+			<label for="autor"><%= __('Autor') %></label>
+			<select id="autor" class="form-control">
+				<% for(var i=0; i<data.usuarios.length; i++) { %>
+					<option value="<%= data.usuarios[i].id %>"><%= data.usuarios[i].username %></option>
+				<% } %>
+			</select>
+		</div>
+
+		<div class="form-group">
 			<input class="btn btn-primary" type="submit" name="submit" value="<%= __('Agregar') %>">
 		</div>
 	</form>
@@ -57,6 +66,7 @@
 				<td><%= __('Mensaje de retorno') %></td>
 				<td><%= __('Tiempo Escribiendo') %></td>
 				<td><%= __('Tiempo hasta respuesta') %></td>
+				<td><%= __('Autor') %></td>
 				<td><%= __('Respuestas') %></td>
 			</tr>
 		</thead>
@@ -70,6 +80,7 @@
 					<td><%= data.plantillas[i].mensaje_retorno || "no definido" %></td>
 					<td><%= data.plantillas[i].tiempo_escribiendo  %></td>
 					<td><%= data.plantillas[i].tiempo_respuesta %></td>
+					<td><%= data.plantillas[i].autor.username %></td>
 					<td>
 						<%= data.plantillas[i].conteo_respuestas || '0' %>
 						<small>

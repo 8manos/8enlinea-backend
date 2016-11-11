@@ -43,6 +43,9 @@ module.exports = {
   	respuestas: {
   		collection: 'respuesta',
   		via: 'de_plantilla'
-  	}
+  	},
+    autor:{
+      model:'user'
+    }
   }
 };

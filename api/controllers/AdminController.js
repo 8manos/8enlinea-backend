@@ -38,10 +38,13 @@ module.exports = {
     if (req.isSocket) {
       return res.badRequest();
     }
-    Plantilla.find().exec(function(err, plantillas) {
+    Plantilla.find().populate('autor').exec(function(err, plantillas) {
       var data = new Object();
       data.plantillas = plantillas;
-      res.view({ data });
+      User.find().exec(function(err,usuarios)){
+        data.usuarios = usuarios;
+        res.view({ data });
+      }
     });
   }
 };
