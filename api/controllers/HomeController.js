@@ -46,7 +46,7 @@ module.exports = {
     }
     */
 
-    Plantilla.find({ identificador:'saludo_1' }).populate('respuestas').exec(function (err, plantilla){
+    Plantilla.find({ identificador:'saludo_1' }).populate('respuestas').populate('autor').exec(function (err, plantilla){
       if (err) {
         return res.serverError(err);
       }
