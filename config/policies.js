@@ -67,6 +67,19 @@ module.exports.policies = {
     '*': false,
     'create' : true
   },
+  ConversacionController: {
+    '*': [
+      'basicAuth',
+      'passport',
+      'sessionAuth',
+      'ModelPolicy',
+      'AuditPolicy',
+      'OwnerPolicy',
+      'PermissionPolicy',
+      'RolePolicy',
+      'CriteriaPolicy'
+    ]
+  },
   PlantillaController: {
     '*': [
       'basicAuth',

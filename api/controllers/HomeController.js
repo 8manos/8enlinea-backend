@@ -34,6 +34,7 @@ module.exports = {
 
     sails.log("Sesion: ", req.session.authenticated );
 
+    /* 
     if( req.session.authenticated ){
       timed = setTimeout( function () {
         sails.sockets.broadcast( socketId, { greeting: 'Parece que ya nos conocemos, espera mientras cargamos tus conversaciones', socketId: socketId });
@@ -43,6 +44,7 @@ module.exports = {
         sails.sockets.broadcast( socketId, { greeting: 'Parece que aún no nos conocemos, quieres iniciar sesión?', socketId: socketId });
       }, 3000);
     }
+    */
 
     Plantilla.find({ identificador:'saludo_1' }).populate('respuestas').exec(function (err, plantilla){
       if (err) {
