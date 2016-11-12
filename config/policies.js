@@ -68,8 +68,7 @@ module.exports.policies = {
     'create' : true
   },
   PlantillaController: {
-    '*': false,
-    'create': [
+    '*': [
       'basicAuth',
       'passport',
       'sessionAuth',
