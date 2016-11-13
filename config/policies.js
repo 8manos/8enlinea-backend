@@ -64,7 +64,17 @@ module.exports.policies = {
 	// }
 
   UserController: {
-    '*': false,
+    '*': [
+      'basicAuth',
+      'passport',
+      'sessionAuth',
+      'ModelPolicy',
+      'AuditPolicy',
+      'OwnerPolicy',
+      'PermissionPolicy',
+      'RolePolicy',
+      'CriteriaPolicy'
+    ],
     'create' : true
   },
   ConversacionController: {
