@@ -13,6 +13,7 @@ module.exports = {
 		    return res.serverError(err);
 		  }
 		  if( user.conversaciones.length > 0 ){
+		  	sails.log( "Conversaciones encontradas: ", user.conversaciones );
 		  	return res.json(user.conversaciones);
 		  }else{
 		  	Conversacion.create({
@@ -23,6 +24,7 @@ module.exports = {
 		  	  conversacion.save(
 	  	        function(err){
 	  	        	if (err) { return res.serverError(err); }
+	  	        	sails.log( "Conversacion creada: ", conversacion );
   					return res.json(conversacion);
 	  	        });
 		  	});
