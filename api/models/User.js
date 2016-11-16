@@ -24,6 +24,10 @@ _.merge(exports, {
         collection: 'plantilla',
         via: 'autor'
     },
+    contactos: {
+        collection: 'contacto',
+        via: 'user'
+    },
     en_conversacion: {
     	collection: 'conversacion',
     	via: 'usuarios'

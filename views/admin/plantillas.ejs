@@ -74,7 +74,12 @@
 			<% for(var i=0; i<data.plantillas.length; i++) { %>
 				<tr>
 					<td><input type="checkbox" name="<%= data.plantillas[i].id %>"></td>
-					<td><%= data.plantillas[i].identificador %></td>
+					<td>
+						<%= data.plantillas[i].identificador %><br>
+						<small>
+							( <a href="plantilla/<%= data.plantillas[i].id %>" class="editar_plantilla" data-id="<%= data.plantillas[i].id %>"><%= __('Editar') %></a> / <a href="#" class="ver_respuestas" data-id="<%= data.plantillas[i].id %>"><%= __('Eliminar') %></a>)
+						</small>		
+					</td>
 					<td><%= data.plantillas[i].mensaje %></td>
 					<td><%= data.plantillas[i].multimedia || "no definido" %></td>
 					<td><%= data.plantillas[i].mensaje_retorno || "no definido" %></td>
@@ -82,7 +87,7 @@
 					<td><%= data.plantillas[i].tiempo_respuesta %></td>
 					<td><%= data.plantillas[i].autor.username || "sin autor" %></td>
 					<td>
-						<%= data.plantillas[i].conteo_respuestas || '0' %>
+						<%= data.plantillas[i].respuestas.length || '0' %>
 						<small>
 							(<a href="#" class="nueva_respuesta" data-toggle="modal" data-target="#modal_respuesta" data-id="<%= data.plantillas[i].id %>"><%= __('Agregar') %></a> / <a href="#" class="ver_respuestas" data-toggle="modal" data-target="#modal_ver_respuestas" data-id="<%= data.plantillas[i].id %>"><%= __('Ver') %></a>)
 						</small>

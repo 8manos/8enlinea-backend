@@ -1,7 +1,7 @@
 // 8enlinea front-end script
 ($(document).ready(function(){
 	// Toggle de formularios
-	$('#admin-form').hide();
+	$('#admin-form:not(.visible)').hide();
 	$('#toggle-form').on('click', function(e) {
 		e.preventDefault();
 		$('#admin-form').slideToggle( "slow" );

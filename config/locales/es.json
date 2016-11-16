@@ -34,5 +34,10 @@
 	"Mensaje de retorno": "Mensaje de retorno",
 	"Multimedia": "Multimedia",
 	"URL Multimedia": "URL Multimedia",
-	"Autor": "Autor"
+	"Autor": "Autor",
+	"Editar": "Editar",
+	"Eliminar": "Eliminar",
+	"Editar plantilla:": "Editar plantilla:",
+	"Editar plantilla": "Editar plantilla",
+	"ID": "ID"
 }

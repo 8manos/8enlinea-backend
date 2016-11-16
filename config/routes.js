@@ -46,6 +46,11 @@ module.exports.routes = {
     action: 'home'
   },
 
+  '/admin/plantilla/:id': {
+    controller: 'plantilla',
+    action: 'find'
+  },
+
   '/login': {
     controller: 'home',
     action: 'login'

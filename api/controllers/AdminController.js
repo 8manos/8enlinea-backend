@@ -38,7 +38,7 @@ module.exports = {
     if (req.isSocket) {
       return res.badRequest();
     }
-    Plantilla.find().populate('autor').exec(function(err, plantillas) {
+    Plantilla.find().populate('autor').populate('respuestas').exec(function(err, plantillas) {
       var data = new Object();
       data.plantillas = plantillas;
       User.find().exec(function(err,usuarios){
