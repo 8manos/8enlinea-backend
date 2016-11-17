@@ -1,0 +1,63 @@
+<!-- Modal para agregar una accion -->
+<div class="modal fade" id="modal_accion" tabindex="-1" role="dialog" aria-labelledby="modal_accionLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal_accionLabel"><%= __('Nueva accion') %></h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="ajax-form" action="/accion" method="POST">
+          <input type="hidden" id="en_plantilla" name="en_plantilla">
+
+          <div class="form-group">
+            <label for="tipo"><%= __('Tipo') %></label>
+            <select name="tipo" id="tipo" class="form-control">
+              <option value="cambia_css"><%= __('Cambia CSS') %></option>
+              <option value="activa_mensaje"><%= __('Activ mensaje') %></option>
+              <option value="inicia_conversacion"><%= __('Inicia Conversación') %></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="parametro" class="control-label"><%= __('Parametro') %></label>
+            <input type="text" class="form-control" id="parametro" name="parametro">
+          </div>
+
+          <div class="form-group">
+            <label for="valor" class="control-label"><%= __('Valor') %></label>
+            <input type="text" class="form-control" id="valor" name="valor">
+          </div>
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" value="<%= __('Agregar acción') %>">
+        </form>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para ver acciones agregadas -->
+<div class="modal fade" id="modal_ver_acciones" tabindex="-1" role="dialog" aria-labelledby="modal_accionLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal_accionLabel"><%= __('Ver acciones') %></h4>
+      </div>
+
+      <div class="modal-body">
+        <ul class="lista_acciones">
+          <small>Cargando...</small>
+        </ul>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

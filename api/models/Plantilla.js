@@ -46,6 +46,10 @@ module.exports = {
   	},
     autor:{
       model:'user'
+    },
+    acciones:{
+      collection: 'accion',
+      via: 'en_plantilla'
     }
   }
 };

@@ -88,7 +88,8 @@ module.exports.policies = {
       'PermissionPolicy',
       'RolePolicy',
       'CriteriaPolicy'
-    ]
+    ],
+    'responder': true
   },
   PlantillaController: {
     '*': [

@@ -34,19 +34,15 @@ module.exports = {
 
     sails.log("Sesion: ", req.session.authenticated );
 
-    /* 
+    
     if( req.session.authenticated ){
-      timed = setTimeout( function () {
-        sails.sockets.broadcast( socketId, { greeting: 'Parece que ya nos conocemos, espera mientras cargamos tus conversaciones', socketId: socketId });
-      }, 3000);
+      var intro = 'intro_logged_in';
     }else{
-      timed = setTimeout( function () {
-        sails.sockets.broadcast( socketId, { greeting: 'Parece que aún no nos conocemos, quieres iniciar sesión?', socketId: socketId });
-      }, 3000);
+      var intro = 'intro_logged_out';
     }
-    */
+    
 
-    Plantilla.find({ identificador:'saludo_1' }).populate('respuestas').populate('autor').exec(function (err, plantilla){
+    Plantilla.find({ identificador: intro }).populate('respuestas').populate('autor').populate('acciones').exec(function (err, plantilla){
       if (err) {
         return res.serverError(err);
       }

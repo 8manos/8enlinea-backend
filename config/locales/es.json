@@ -39,5 +39,14 @@
 	"Eliminar": "Eliminar",
 	"Editar plantilla:": "Editar plantilla:",
 	"Editar plantilla": "Editar plantilla",
-	"ID": "ID"
+	"ID": "ID",
+	"Acciones": "Acciones",
+	"Nueva accion": "Nueva accion",
+	"Ver acciones": "Ver acciones",
+	"Cambia CSS": "Cambia CSS",
+	"Activ mensaje": "Activ mensaje",
+	"Inicia Conversación": "Inicia Conversación",
+	"Parametro": "Parametro",
+	"Valor": "Valor",
+	"Agregar acción": "Agregar acción"
 }

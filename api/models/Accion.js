@@ -13,14 +13,20 @@ module.exports = {
   		required: true,
   		enum: ['cambia_css', 'activa_mensaje', 'inicia_conversacion']
   	},
+    parametro: {
+      type: 'string'
+    },
   	valor: {
-  		type: 'string',
-  		required: true
+  		type: 'string'
   	},
   	en_mensaje: {
   		collection: 'mensaje',
   		via: 'acciones'
-  	}
+  	},
+    en_plantilla: {
+      model: 'plantilla',
+      via: 'acciones'
+    }
   }
 
 };

@@ -7,7 +7,7 @@
 
 module.exports = {
 	find: function( req, res ){	
-		Plantilla.findOne( req.param('id') ).populate('respuestas').exec(function (err, plantilla) {
+		Plantilla.findOne( req.param('id') ).populate('respuestas').populate('acciones').exec(function (err, plantilla) {
 		  if (err) { return; }
 		    var data = new Object();
       		data.plantilla = plantilla;

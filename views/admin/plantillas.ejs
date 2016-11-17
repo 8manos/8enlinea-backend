@@ -1,4 +1,5 @@
 <%- include partials/modal-respuesta.ejs %>
+<%- include partials/modal-accion.ejs %>
 <%- include partials/header.ejs %>
 
 <div class="breadcrumb clearfix">
@@ -68,6 +69,7 @@
 				<td><%= __('Tiempo hasta respuesta') %></td>
 				<td><%= __('Autor') %></td>
 				<td><%= __('Respuestas') %></td>
+				<td><%= __('Acciones') %></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -90,6 +92,12 @@
 						<%= data.plantillas[i].respuestas.length || '0' %>
 						<small>
 							(<a href="#" class="nueva_respuesta" data-toggle="modal" data-target="#modal_respuesta" data-id="<%= data.plantillas[i].id %>"><%= __('Agregar') %></a> / <a href="#" class="ver_respuestas" data-toggle="modal" data-target="#modal_ver_respuestas" data-id="<%= data.plantillas[i].id %>"><%= __('Ver') %></a>)
+						</small>
+					</td>
+					<td>
+						<% if( data.plantillas[i].acciones ){ %> <%= data.plantillas[i].acciones.length %> <% }else{ %>0<%} %>
+						<small>
+							(<a href="#" class="nueva_accion" data-toggle="modal" data-target="#modal_accion" data-id="<%= data.plantillas[i].id %>"><%= __('Agregar') %></a> / <a href="#" class="ver_acciones" data-toggle="modal" data-target="#modal_ver_acciones" data-id="<%= data.plantillas[i].id %>"><%= __('Ver') %></a>)
 						</small>
 					</td>
 				</tr>
