@@ -19,7 +19,7 @@ module.exports = {
   	},
   	estado: {
   		type: 'string',
-  		defaultsTo: 'escribiendo',
+  		defaultsTo: 'pendiente',
   		enum: ['pendiente', 'escribiendo', 'enviado', 'leido', 'respondido']
   	},
     multimedia: {
@@ -31,7 +31,7 @@ module.exports = {
   	},
   	tiempo_respuesta: {
   		type: 'integer',
-  		defaultsTo: 10000
+  		defaultsTo: 10
   	},
     conteo_respuestas: {
       type: 'integer',
