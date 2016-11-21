@@ -98,4 +98,18 @@
 			body.addClass( "done" );
 		});		
 	});
+
+	// Borrar plantilla
+	$('.eliminar_plantilla').on( 'click', function( e ){
+		e.preventDefault();
+		var id = $(this).data('id');
+		$.ajax({
+			url: '/plantilla/'+id,
+			type: 'DELETE',
+			success: function(result) {
+				alert("Plantilla " + id + " eliminada.");
+				location.reload();
+			}
+		});
+	});
 }));
