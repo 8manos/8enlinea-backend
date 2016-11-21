@@ -1,4 +1,29 @@
 // 8enlinea front-end script
+
+// Borrar respuesta
+function eliminar_respuesta( id ){
+	$.ajax({
+		url: '/respuesta/'+id,
+		type: 'DELETE',
+		success: function(result) {
+			alert("Respuesta " + id + " eliminada.");
+			location.reload();
+		}
+	});
+}
+
+// Borrar acción
+function eliminar_accion( id ){
+	$.ajax({
+		url: '/accion/'+id,
+		type: 'DELETE',
+		success: function(result) {
+			alert("Acción " + id + " eliminada.");
+			location.reload();
+		}
+	});
+}
+
 ($(document).ready(function(){
 	// Toggle de formularios
 	$('#admin-form:not(.visible)').hide();
@@ -65,12 +90,12 @@
 			url: "/plantilla/"+ id +"/respuestas"
 		}).done(function( data ) {
 			body.text('');
-			content += '<table class="table table-striped table-bordered table-hover"><thead><tr><td>Tipo</td><td>Texto</td><td>Destino</td></tr></thead><tbody>';
+			content += '<table class="table table-striped table-bordered table-hover"><thead><tr><td>Tipo</td><td>Texto</td><td>Destino</td><td>Admin</td></tr></thead><tbody>';
 			$.each( data , function( i, item ){
-				content += '<tr><td>'+ data[i].tipo +'</td><td>'+ data[i].texto +'</td><td>'+ data[i].destino +'</td></tr>';
+				content += '<tr><td>'+ data[i].tipo +'</td><td>'+ data[i].texto +'</td><td>'+ data[i].destino +'</td><td><a href="#" class="eliminar_respuesta" onclick="return eliminar_respuesta( '+ data[i].id +' );">(Eliminar)</a></td></tr>';
 			});
 			content += '</tbody></table>';
-			body.append( content );
+			body.append( $.parseHTML(content) );
 			body.addClass( "done" );
 		});		
 	});
@@ -89,12 +114,12 @@
 			url: "/plantilla/"+ id +"/acciones"
 		}).done(function( data ) {
 			body.text('');
-			content += '<table class="table table-striped table-bordered table-hover"><thead><tr><td>Tipo</td><td>Parametro</td><td>Valor</td></tr></thead><tbody>';
+			content += '<table class="table table-striped table-bordered table-hover"><thead><tr><td>Tipo</td><td>Parametro</td><td>Valor</td><td>Admin</td></tr></thead><tbody>';
 			$.each( data , function( i, item ){
-				content += '<tr><td>'+ data[i].tipo +'</td><td>'+ data[i].parametro +'</td><td>'+ data[i].valor +'</td></tr>';
+				content += '<tr><td>'+ data[i].tipo +'</td><td>'+ data[i].parametro +'</td><td>'+ data[i].valor +'</td><td><a href="#" class="eliminar_accion" onclick="return eliminar_accion( '+ data[i].id +' );">(Eliminar)</a></td></tr>';
 			});
 			content += '</tbody></table>';
-			body.append( content );
+			body.append( $.parseHTML(content) );
 			body.addClass( "done" );
 		});		
 	});
@@ -112,4 +137,5 @@
 			}
 		});
 	});
+
 }));
