@@ -17,8 +17,9 @@ module.exports.passport = {
     protocol: 'oauth',
     strategy: require('passport-twitter').Strategy,
     options: {
-      consumerKey: process.env.TWITTER_API,
-      consumerSecret: process.env.TWITTER_SECRET
+      consumerKey: process.env.TWITTER_API | 0,
+      consumerSecret: process.env.TWITTER_SECRET | 0,
+      callbackURL: process.env.TWITTER_CALLBACK | "http://127.0.0.1:1337/auth/twitter/callback"
     }
   },
 
