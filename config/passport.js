@@ -27,12 +27,12 @@ module.exports.passport = {
     name: 'Google',
     protocol: 'oauth2',
     strategy: require('passport-google-oauth').OAuth2Strategy,
+    skipExtendedUserProfile: false,
     options: {
       clientID: process.env.GOOGLE_API || 1,
       clientSecret: process.env.GOOGLE_SECRET || 1,
       callbackURL: process.env.GOOGLE_CALLBACK || "http://127.0.0.1:1337/auth/twitter/callback",
-      scope: ['profile', 'email'],
-      skipExtendedUserProfile: true
+      scope: ['profile', 'email']
     }
   }
 
