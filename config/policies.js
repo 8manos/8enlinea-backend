@@ -75,7 +75,8 @@ module.exports.policies = {
       'RolePolicy',
       'CriteriaPolicy'
     ],
-    'create' : true
+    'create' : true,
+    me: ['passport']
   },
   ConversacionController: {
     '*': [
