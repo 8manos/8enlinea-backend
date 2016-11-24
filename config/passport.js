@@ -32,7 +32,7 @@ module.exports.passport = {
       clientSecret: process.env.GOOGLE_SECRET || 1,
       callbackURL: process.env.GOOGLE_CALLBACK || "http://127.0.0.1:1337/auth/twitter/callback",
       scope: ['profile', 'email'],
-      skipExtendedUserProfile: false
+      skipExtendedUserProfile: true
     }
   }
 
