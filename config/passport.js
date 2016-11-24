@@ -23,21 +23,23 @@ module.exports.passport = {
     }
   },
 
-  /*
-  bearer: {
-    strategy: require('passport-http-bearer').Strategy,
-    protocol: 'bearer'
-  },
   google: {
     name: 'Google',
     protocol: 'oauth2',
     strategy: require('passport-google-oauth').OAuth2Strategy,
     options: {
-      clientID: 'your-client-id',
-      clientSecret: 'your-client-secret',
+      clientID: process.env.GOOGLE_API || 1,
+      clientSecret: process.env.GOOGLE_SECRET || 1,
+      callbackURL: process.env.GOOGLE_CALLBACK || "http://127.0.0.1:1337/auth/twitter/callback",
       scope: ['profile', 'email']
     }
   }
+
+  /*
+  bearer: {
+    strategy: require('passport-http-bearer').Strategy,
+    protocol: 'bearer'
+  },
 
 
   github: {
