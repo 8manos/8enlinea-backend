@@ -39,7 +39,8 @@ module.exports.policies = {
   ],
 
   AuthController: {
-    '*': [ 'passport' ]
+    '*': [ 'passport' ],
+    logout: true
   },
 
   /***************************************************************************
