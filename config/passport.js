@@ -16,6 +16,7 @@ module.exports.passport = {
     name: 'Twitter',
     protocol: 'oauth',
     strategy: require('passport-twitter').Strategy,
+    skipExtendedUserProfile: false,
     options: {
       consumerKey: process.env.TWITTER_API || 1,
       consumerSecret: process.env.TWITTER_SECRET || 1,
@@ -27,7 +28,6 @@ module.exports.passport = {
     name: 'Google',
     protocol: 'oauth2',
     strategy: require('passport-google-oauth').OAuth2Strategy,
-    skipExtendedUserProfile: false,
     options: {
       clientID: process.env.GOOGLE_API || 1,
       clientSecret: process.env.GOOGLE_SECRET || 1,
