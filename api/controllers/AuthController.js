@@ -19,16 +19,16 @@ module.exports = {
    */
   logout: function (req, res) {
     req.session.authenticated = false;
-    req.logOut();
+    req.logout();
     req.session.destroy();
     delete req.user;
     // delete req.session.passport;
 
     if (!req.isSocket) {
-      res.ok();
+      res.redirect('/');
     }
     else {
-      res.redirect('/');
+      res.ok();
     }
   },
 
