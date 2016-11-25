@@ -25,7 +25,7 @@ module.exports = {
     req.session.authenticated = false;
 
     if (!req.isSocket) {
-      res.redirect(req.query.next || '/');
+      res.ok();
     }
     else {
       res.ok();
