@@ -59,7 +59,9 @@ module.exports.routes = {
   '/logout': {
     controller: 'auth',
     action: 'logout'
-  }
+  },
+
+  'get /logout': 'AuthController.logout',
 
   /***************************************************************************
   *                                                                          *
