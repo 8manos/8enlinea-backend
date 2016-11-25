@@ -40,7 +40,7 @@ module.exports.policies = {
 
   AuthController: {
     '*': [ 'passport' ],
-    logout: true
+    'logout': ['passport']
   },
 
   /***************************************************************************
