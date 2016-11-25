@@ -25,7 +25,7 @@ module.exports = {
 	  	        function(err){
 	  	        	if (err) { return res.serverError(err); }
 	  	        	sails.log( "Conversacion creada: ", conversacion );
-  					return res.json(conversacion);
+  					return res.json([conversacion]);
 	  	        });
 		  	});
 		  }
