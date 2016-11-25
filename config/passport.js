@@ -16,7 +16,6 @@ module.exports.passport = {
     name: 'Twitter',
     protocol: 'oauth',
     strategy: require('passport-twitter').Strategy,
-    skipExtendedUserProfile: false,
     options: {
       consumerKey: process.env.TWITTER_API || 1,
       consumerSecret: process.env.TWITTER_SECRET || 1,
