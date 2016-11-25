@@ -22,6 +22,41 @@ module.exports = {
 		});
 	},
 
+	subscribe: function( req, res ){
+	  if (!req.isSocket) {
+	    return res.badRequest();
+	  }
+
+	  var roomName = req.param('id');
+	  sails.sockets.join(req, roomName, function(err) {
+	    if (err) {
+	      return res.serverError(err);
+	    }
+
+	    return res.json({
+	      message: 'Subscribed to conversacion '+roomName+'!'
+	    });
+	  });
+	},
+
+	unsubscribe: function( req, res ){
+	  if ( _.isUndefined(req.param('id')) ) {
+	    return res.badRequest('id is required.');
+	  }
+
+	  if (!req.isSocket) {
+	    return res.badRequest('This endpoint only supports socket requests.');
+	  }
+
+	  var roomName = req.param('id');
+	  sails.sockets.leave(req, roomName, function(err) {
+	    if (err) {return res.serverError(err);}
+	    return res.json({
+	      message: 'Left conversacion '+roomName+'!'
+	    });
+	  });		
+	},
+
 	responder: function (req, res) {
 		sails.log( 'El usuario ' + req.session.id + 'ha solicitado el destino: ', req.param('destino') );
 		Plantilla.find({ identificador: req.param('destino') }).populate('respuestas').populate('acciones').exec(function (err, plantilla) {

@@ -51,6 +51,16 @@ module.exports.routes = {
     action: 'find'
   },
 
+  '/conversacion/subscribe/:id': {
+    controller: 'conversacion',
+    action: 'subscribe'
+  },
+
+  '/conversacion/unsubscribe/:id': {
+    controller: 'conversacion',
+    action: 'unsubscribe'
+  },
+
   '/login': {
     controller: 'home',
     action: 'login'
