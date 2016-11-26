@@ -1,0 +1,48 @@
+<%- include ../admin/partials/header.ejs %>
+
+<div class="breadcrumb clearfix">
+	<a href="/admin">Admin</a> / <a href="/admin/historias"><%= __('Historias') %></a>	
+</div>
+
+<section id="admin-form" class="panel historia_new visible">
+	<h2><%= __('Editar historia') %>: <%= data.historia.identificador %></h2>
+
+	<form method="POST" action="/historia/<%= data.historia.id %>" id="form_historia_new" class="ajax-form">
+		<div class="form-group">
+			<label for="id"><%= __('ID') %></label>
+			<input type="text" disabled id="id" name="id" value=<%= data.historia.id %>>
+		</div>
+
+		<div class="form-group">
+			<label for="identificador"><%= __('Identificador') %></label>
+			<input class="form-control" type="text" name="identificador" id="identificador" required value="<%= data.historia.identificador %>">
+		</div>
+
+		<div class="form-group">
+			<label for="nombre"><%= __('Nombre') %></label>
+			<input class="form-control" type="text" name="nombre" id="nombre" value="<%= data.historia.nombre || '' %>">
+		</div>
+
+		<div class="form-group">
+			<label for="mensaje_inicial"><%= __('Mensaje Inicial') %></label>
+			<input class="form-control" type="text" name="mensaje_inicial" id="mensaje_inicial" value="<%= data.historia.mensaje_inicial || '' %>">
+		</div>
+
+		<div class="form-group">
+			<label for="usuario"><%= __('Usuario') %></label>
+			<select id="usuario" class="form-control" name="usuario">
+				<% for(var i=0; i<data.usuarios.length; i++) { %>
+					<% if( data.usuarios[i].id == data.historia.usuario.id ){ %>
+						<option selected value="<%= data.usuarios[i].id %>"><%= data.usuarios[i].username %></option>
+					<% }else{ %>
+						<option value="<%= data.usuarios[i].id %>"><%= data.usuarios[i].username %></option>
+					<% } %>
+				<% } %>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<input class="btn btn-primary" type="submit" name="submit" value="<%= __('Editar') %>">
+		</div>
+	</form>
+</section>

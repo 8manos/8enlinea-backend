@@ -1,0 +1,70 @@
+<%- include partials/header.ejs %>
+
+<div class="breadcrumb clearfix">
+	<a href="/admin">Admin</a> / <a href="/admin/historias"><%= __('Historias') %></a>	
+	<a id="toggle-form" href="#" class="btn btn-primary navbar-btn"><%= __('Agregar nueva historia') %></a>
+</div>
+
+<section id="admin-form" class="panel historia_new">
+	<h2><%= __('Agregar nueva historia') %></h2>
+
+	<form method="POST" action="/historia" id="form_historia_new" class="ajax-form">
+		<div class="form-group">
+			<label for="identificador"><%= __('Identificador') %></label>
+			<input class="form-control" type="text" name="identificador" id="identificador" required>
+		</div>
+
+		<div class="form-group">
+			<label for="nombre"><%= __('Nombre') %></label>
+			<input class="form-control" type="text" name="nombre" id="nombre" required>
+		</div>
+
+		<div class="form-group">
+			<label for="mensaje_inicial"><%= __('Mensaje inicial') %></label>
+			<input class="form-control" type="text" name="mensaje_inicial" id="mensaje_inicial" placeholder="ej: saludo_1">
+		</div>
+
+		<div class="form-group">
+			<label for="usuario"><%= __('Usuario Inicial') %></label>
+			<select id="usuario" class="form-control" name="usuario">
+				<% for(var i=0; i<data.usuarios.length; i++) { %>
+					<option value="<%= data.usuarios[i].id %>"><%= data.usuarios[i].username %></option>
+				<% } %>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<input class="btn btn-primary" type="submit" name="submit" value="<%= __('Agregar') %>">
+		</div>
+	</form>
+</section>
+
+<section id="admin-content" class="historias">
+	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<td><input type="checkbox" name="select_all"></td>
+				<td><%= __('Identificador') %></td>
+				<td><%= __('Nombre') %></td>
+				<td><%= __('Mensaje Inicial') %></td>
+				<td><%= __('Usuario Inicial') %></td>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(var i=0; i<data.historias.length; i++) { %>
+				<tr>
+					<td><input type="checkbox" name="<%= data.historias[i].id %>"></td>
+					<td>
+						<%= data.historias[i].identificador %><br>
+						<small>
+							( <a href="historia/<%= data.historias[i].id %>" class="editar_historia" data-id="<%= data.historias[i].id %>"><%= __('Editar') %></a> / <a href="#" class="eliminar_historia" data-id="<%= data.historias[i].id %>"><%= __('Eliminar') %></a>)
+						</small>		
+					</td>
+					<td><%= data.historias[i].nombre || "no definido" %></td>
+					<td><%= data.historias[i].mensaje_inicial || "no definido" %></td>
+					<td><%= data.historias[i].usuario.username || "sin autor" %></td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+</section>

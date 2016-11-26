@@ -47,6 +47,24 @@ module.exports = {
         res.view({ data });
       });
     });
+  },
+
+  /**
+   * `AdminController.plantillas()`
+   */
+  historias: function (req, res) {
+    if (req.isSocket) {
+      return res.badRequest();
+    }
+    Historia.find().populate('usuario').exec(function(err, historias) {
+      var data = new Object();
+      data.historias = historias;
+      User.find().exec(function(err,usuarios){
+        data.usuarios = usuarios;
+        console.log('Sending Historias: ', data );
+        res.view({ data });
+      });
+    });
   }
 };
 

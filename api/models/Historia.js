@@ -8,6 +8,10 @@
 module.exports = {
 
   attributes: {
+    identificador:{
+      type: 'string',
+      required: true
+    },
   	nombre:{
   		type: 'string',
   		required: true
@@ -16,9 +20,8 @@ module.exports = {
   		type: 'string',
   		required: true
   	},
-  	usuarios: {
-  		collection: 'user',
-  		via: 'en_historia'
+  	usuario: {
+  		 model:'user'
   	}
   }
 };

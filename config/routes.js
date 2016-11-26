@@ -51,6 +51,11 @@ module.exports.routes = {
     action: 'find'
   },
 
+  '/admin/historia/:id': {
+    controller: 'historia',
+    action: 'admin'
+  },
+
   '/conversacion/subscribe/:id': {
     controller: 'conversacion',
     action: 'subscribe'
