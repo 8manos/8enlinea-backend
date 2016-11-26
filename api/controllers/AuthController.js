@@ -103,7 +103,7 @@ module.exports = {
         }
 
         sails.log.info('user', user, 'authenticated successfully');
-        return res.json(user);
+        return res.view({ data: user.id });
       });
     });
   },
