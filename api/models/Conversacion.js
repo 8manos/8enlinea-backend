@@ -11,10 +11,18 @@ module.exports = {
     nombre:{
       type: 'string'
     },
+    mensaje_inicial: {
+      type: 'string',
+      required: true
+    },
   	mensajes: {
   		collection: 'mensaje',
   		via: 'en_conversacion'
   	},
+    respuestas: {
+      collection: 'respuesta',
+      via: 'de_conversacion'
+    },
     alternativas :{
       collection: 'alternativa',
       via: 'en_conversacion'

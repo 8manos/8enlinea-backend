@@ -59,7 +59,7 @@
 					<td><%= data.usuarios[i].status || req.__('Sin estado') %></td>
 					<td><%= data.usuarios[i].conteo_mensajes || '0' %></td>
 					<td><%= data.usuarios[i].conteo_fotos || '0' %></td>
-					<td><%= data.usuarios[i].conteo_conversaciones || '0' %></td>
+					<td><%= data.usuarios[i].conversaciones.length || '0' %></td>
 				</tr>
 			<% } %>
 		</tbody>

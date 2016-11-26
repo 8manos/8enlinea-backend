@@ -24,7 +24,7 @@ module.exports = {
     if (req.isSocket) {
       return res.badRequest();
     }
-    User.find().exec(function(err, usuarios) {
+    User.find().populate('conversaciones').exec(function(err, usuarios) {
       var data = new Object();
       data.usuarios = usuarios;
       res.view({ data });
@@ -50,7 +50,7 @@ module.exports = {
   },
 
   /**
-   * `AdminController.plantillas()`
+   * `AdminController.historias()`
    */
   historias: function (req, res) {
     if (req.isSocket) {

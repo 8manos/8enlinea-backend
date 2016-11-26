@@ -24,7 +24,15 @@ module.exports = {
   	de_plantilla: {
   		collection: 'plantilla',
   		via: 'respuestas'
-  	}
+  	},
+    de_mensaje: {
+      collection: 'mensaje',
+      via: 'respuestas'
+    },
+    de_conversacion: {
+      collection: 'conversacion',
+      via: 'respuestas'
+    }
   }
 };
 

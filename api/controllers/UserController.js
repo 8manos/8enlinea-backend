@@ -16,18 +16,41 @@ module.exports = {
 		  	sails.log( "Conversaciones encontradas: ", user.conversaciones );
 		  	return res.json(user.conversaciones);
 		  }else{
-		  	Conversacion.create({
-		  		de_usuario: req.session.passport.user
-		  	}).exec(function (err, conversacion){
-		  	  if (err) { return res.serverError(err); }
-		  	  conversacion.usuarios.add( req.session.passport.user );
-		  	  conversacion.save(
-	  	        function(err){
-	  	        	if (err) { return res.serverError(err); }
-	  	        	sails.log( "Conversacion creada: ", conversacion );
-  					return res.json([conversacion]);
-	  	        });
-		  	});
+		  	var historia_base = false;
+
+		  	Historia.find({ identificador: 'inicial' }).populate( 'usuario' ).exec(function (err, historia){
+				if (err) {
+					return res.serverError(err);
+				}
+
+				console.log( 'Historia: ', historia );
+
+				historia_base = historia[0];
+
+			  	Conversacion.create({
+			  		nombre: historia_base.nombre,
+			  		de_usuario: req.session.passport.user,
+			  		mensaje_inicial: historia_base.mensaje_inicial
+			  	}).exec(function (err, conversacion){
+			  	  if (err) { 
+			  	  	console.log('Error creando conversacion con historia: ', historia_base );
+			  	  	return res.serverError(err); 
+			  	  }
+			  	  console.log( 'Creando conversacion con historia: ', historia_base );
+			  	  console.log( 'Adding usuario: ', req.session.passport.user );
+			  	  conversacion.usuarios.add( req.session.passport.user );
+			  	  console.log( 'Adding usuario: ', historia_base.usuario.id );
+			  	  conversacion.usuarios.add( historia_base.usuario.id );
+			  	  conversacion.save(
+		  	        function(err){
+		  	        	if (err) { return res.serverError(err); }
+		  	        	sails.log( "Conversacion creada: ", conversacion );
+	  					return res.json([conversacion]);
+		  	        });
+			  	});
+		    });
+
+
 		  }
 		});
 	}

@@ -17,28 +17,31 @@ module.exports = {
   		defaultsTo: 'escribiendo',
       enum: ['pendiente', 'escribiendo', 'enviado', 'leido', 'respondido']
   	},
-  	tiempo_escribiendo: {
-  		type: 'integer',
-  		defaultsTo: 5000
-  	},
-  	tiempo_respuesta: {
-  		type: 'integer',
-  		defaultsTo: 10000
-  	},
     multimedia: {
       type: 'string'
     }, 
+    tiempo_escribiendo: {
+      type: 'integer',
+      defaultsTo: 5000
+    },
+    tiempo_respuesta: {
+      type: 'integer',
+      defaultsTo: 10000
+    },
   	en_conversacion: {
   		collection: 'conversacion',
   		via: 'mensajes'
   	},
   	autor:{
-      model:'user',
-      unique: true
+      model:'user'
     },
     acciones:{
-      model: 'accion',
+      collection: 'accion',
       via: 'en_mensaje'
+    },
+    respuestas: {
+      collection: 'respuesta',
+      via: 'de_mensaje'
     }
   }
 
