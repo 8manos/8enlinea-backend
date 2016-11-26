@@ -32,6 +32,10 @@ _.merge(exports, {
     	collection: 'conversacion',
     	via: 'usuarios'
     },
+    en_historia: {
+        collection: 'historia',
+        via: 'usuarios'
+    },
     conteo_mensajes: {
         type: 'integer',
         default: 0

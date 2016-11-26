@@ -8,6 +8,9 @@
 module.exports = {
 
   attributes: {
+    nombre:{
+      type: 'string'
+    },
   	mensajes: {
   		collection: 'mensaje',
   		via: 'en_conversacion'
