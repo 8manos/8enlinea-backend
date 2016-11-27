@@ -71,6 +71,11 @@ module.exports.routes = {
     action: 'agregarespuesta'
   },
 
+  '/conversacion/findmensajes/:id': {
+    controller: 'conversacion',
+    action: 'findmensajes'
+  },
+
   '/login': {
     controller: 'home',
     action: 'login'

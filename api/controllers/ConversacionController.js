@@ -23,6 +23,19 @@ module.exports = {
 		});
 	},
 
+	findmensajes: function( req, res ){
+		var mensajes_array = [];
+
+		Conversacion.findOne( req.param('id') ).populate('mensajes').exec(function (err, conversacion) {
+			for (var i = 0; i < conversacion.mensajes.length; i++) {
+				mensajes_array.push( conversacion.mensajes[i].id ); 
+			}
+			Mensaje.find().where({id: mensajes_array}).populate('acciones').exec(function (err, mensajes) {
+		        res.json( mensajes );
+		    });
+		});
+	},
+
 	subscribe: function( req, res ){
 	  if (!req.isSocket) {
 	    return res.badRequest();
@@ -142,12 +155,25 @@ module.exports = {
 			      			  sails.log('Updated mensaje to estado: ' + updated[0].estado );
 			      			  sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { accion: 'nuevo_mensaje' });
 			      			  var timed2 = setTimeout(function(){
+			      			  	sails.log( 'Cambiando estado de mensaje a: enviado');
 			      			  	Mensaje.update( mensaje_base.id , {estado:'enviado'} ).exec(function afterwards(err, updated){
 				      			  if (err) {
 				      			    return res.negotiate(err);
 				      			  }
 				      			  sails.log('Updated mensaje to estado: ' + updated[0].estado );
 				      			  sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { accion: 'nuevo_mensaje' });
+				      			
+				      			  //Envia acciones una vez enviado el mensaje
+				      			  Mensaje.findOne( mensaje_base.id ).populate('acciones').exec(function (err, mensaje) {
+				      			    if (err) {
+				      			      return;
+				      			    }
+				      			    sails.log('Enviando acciones por socket...');
+				      			    for (var i = 0; i < mensaje.acciones.length; i++) {
+				      			    	sails.sockets.broadcast( conversacion_base.id, 'nueva_accion', { accion: 'nueva_accion', comando: mensaje.acciones[i] });		
+				      			    }
+				      			  });
+
 				      			});
 			      			  }, plantilla_base.tiempo_escribiendo*1000 );
 			      			});
