@@ -111,7 +111,7 @@ module.exports = {
 		    console.log( 'Conversacion base: ', conversacion_base );
 		    console.log('Creando mensaje desde plantilla base: ', plantilla_base );
 		    Mensaje.create({
-			  	mensaje: plantilla_base.mensaje ,
+			  	mensaje: plantilla_base.mensaje || '',
 			  	estado: plantilla_base.estado ,
 			  	multimedia: plantilla_base.multimedia ,
 			  	tiempo_escribiendo: plantilla_base.tiempo_escribiendo ,
