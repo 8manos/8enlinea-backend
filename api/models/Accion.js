@@ -11,7 +11,7 @@ module.exports = {
   	tipo: {
   		type: 'string',
   		required: true,
-  		enum: ['cambia_css', 'activa_mensaje', 'inicia_conversacion', 'login']
+  		enum: ['cambia_css', 'activa_mensaje', 'inicia_conversacion', 'nuevo_toast', 'login']
   	},
     parametro: {
       type: 'string'

@@ -188,7 +188,14 @@ module.exports = {
 				      			    }
 				      			    sails.log('Enviando acciones por socket...');
 				      			    for (var i = 0; i < mensaje.acciones.length; i++) {
-				      			    	sails.sockets.broadcast( conversacion_base.id, 'nueva_accion', { accion: 'nueva_accion', conversacion: conversacion_base.id, comando: mensaje.acciones[i] });		
+				      			    	if( mensaje.acciones[i].tipo == 'nuevo_toast' ){
+				      			    		sails.sockets.broadcast( sails.sockets.getId(req), 'nuevo_toast', { toast: mensaje.acciones[i] });
+				      			    	}else if( mensaje.acciones[i].tipo == 'activa_mensaje' ){
+				      			    		sails.log('Activando mensaje desde socket: ', mensaje.acciones[i] );
+				      			    		sails.controllers.conversacion.agregarmensaje( req.session.passport.user, mensaje.acciones[i].parametro, conversacion_base.id, req, res );
+				      			    	}else{
+				      			    		sails.sockets.broadcast( conversacion_base.id, 'nueva_accion', { accion: 'nueva_accion', conversacion: conversacion_base.id, comando: mensaje.acciones[i] });		
+				      			    	}
 				      			    }
 				      			  });
 
