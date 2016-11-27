@@ -11,12 +11,7 @@ module.exports = {
    * `HomeController.index()`
    */
   index: function (req, res) {
-    Mensaje.find().exec(function(err, mensajes) {
-      var data = new Object();
-      data.mensajes = mensajes;
-      data.opciones = new Object();
-      res.json({ data });
-    });
+    res.view();
   },
 
   login: function(req, res) {

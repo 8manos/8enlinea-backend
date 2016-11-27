@@ -8,9 +8,12 @@ var _ = require('lodash');
 
 module.exports = {
 	find: function( req, res ){	
+		
+		var mensajes_array = [];
+		var data = new Object();
+		
 		Conversacion.findOne( req.param('id') ).populate('mensajes').populate('respuestas').populate('usuarios').populate('alternativas').exec(function (err, conversacion) {
 		  if (err) { return; }
-		    var data = new Object();
       		data.conversacion = conversacion;
 
 		  	if (req.wantsJSON) {
