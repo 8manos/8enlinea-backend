@@ -23,6 +23,18 @@ module.exports = {
 		});
 	},
 
+	detalles: function( req, res ){
+		sails.log('Trayendo detalles de conversacion: ', req.param('id') );
+
+		Conversacion.findOne( req.param('id') ).populate('usuarios').populate('mensajes', { multimedia: { startsWith: 'http' } }).exec(function (err, conversacion) {
+		  if (err) {
+		    sails.log('Error trayendo detalles de conversación.');
+		    return;
+		  }
+		  res.json( conversacion );
+		});
+	},
+
 	findmensajes: function( req, res ){
 		var mensajes_array = [];
 
