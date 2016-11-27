@@ -17,43 +17,50 @@ module.exports = {
 		  	return res.json(user.conversaciones);
 		  }else{
 		  	var historia_base = false;
-
-		  	Historia.find({ identificador: 'inicial' }).populate( 'usuario' ).exec(function (err, historia){
-				if (err) {
-					return res.serverError(err);
-				}
-
-				console.log( 'Historia: ', historia );
-
-				historia_base = historia[0];
-
-			  	Conversacion.create({
-			  		identificador: historia_base.identificador,
-			  		nombre: historia_base.nombre,
-			  		de_usuario: req.session.passport.user,
-			  		mensaje_inicial: historia_base.mensaje_inicial
-			  	}).exec(function (err, conversacion){
-			  	  if (err) { 
-			  	  	console.log('Error creando conversacion con historia: ', historia_base );
-			  	  	return res.serverError(err); 
-			  	  }
-			  	  console.log( 'Creando conversacion con historia: ', historia_base );
-			  	  console.log( 'Adding usuario: ', req.session.passport.user );
-			  	  conversacion.usuarios.add( req.session.passport.user );
-			  	  console.log( 'Adding usuario: ', historia_base.usuario.id );
-			  	  conversacion.usuarios.add( historia_base.usuario.id );
-			  	  conversacion.save(
-		  	        function(err){
-		  	        	if (err) { return res.serverError(err); }
-		  	        	sails.log( "Conversacion creada: ", conversacion );
-	  					return res.json([conversacion]);
-		  	        });
-			  	});
-		    });
-
-
+		  	sails.controllers.user.nuevahistoria( 'inicial', req, res);
 		  }
 		});
+	},
+	nuevahistoria: function( historia, req, res ){
+		if (!req.isSocket) {
+	      return res.badRequest();
+	    }
+
+	    var socketId = sails.sockets.getId(req);
+
+		Historia.find({ identificador: historia }).populate( 'usuario' ).exec(function (err, historia){
+			if (err) {
+				return res.serverError(err);
+			}
+
+			console.log( 'Nueva historia: ', historia );
+
+			historia_base = historia[0];
+
+		  	Conversacion.create({
+		  		identificador: historia_base.identificador,
+		  		nombre: historia_base.nombre,
+		  		de_usuario: req.session.passport.user,
+		  		mensaje_inicial: historia_base.mensaje_inicial
+		  	}).exec(function (err, conversacion){
+		  	  if (err) { 
+		  	  	console.log('Error creando conversacion con historia: ', historia_base );
+		  	  	return res.serverError(err); 
+		  	  }
+		  	  console.log( 'Creando conversacion con historia: ', historia_base );
+		  	  console.log( 'Adding usuario: ', req.session.passport.user );
+		  	  conversacion.usuarios.add( req.session.passport.user );
+		  	  console.log( 'Adding usuario: ', historia_base.usuario.id );
+		  	  conversacion.usuarios.add( historia_base.usuario.id );
+		  	  conversacion.save(
+	  	        function(err){
+	  	        	if (err) { return res.serverError(err); }
+	  	        	sails.log( "Conversacion creada: ", conversacion );
+	  	        	sails.sockets.broadcast( socketId, { accion: 'nueva_historia' } );
+					return res.json([conversacion]);
+	  	        });
+		  	});
+	    });
 	}
 };
 

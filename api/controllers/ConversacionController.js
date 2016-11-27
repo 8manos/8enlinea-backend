@@ -170,7 +170,7 @@ module.exports = {
 				      			    }
 				      			    sails.log('Enviando acciones por socket...');
 				      			    for (var i = 0; i < mensaje.acciones.length; i++) {
-				      			    	sails.sockets.broadcast( conversacion_base.id, 'nueva_accion', { accion: 'nueva_accion', comando: mensaje.acciones[i] });		
+				      			    	sails.sockets.broadcast( conversacion_base.id, 'nueva_accion', { accion: 'nueva_accion', conversacion: conversacion_base.id, comando: mensaje.acciones[i] });		
 				      			    }
 				      			  });
 
@@ -237,6 +237,10 @@ module.exports = {
 
 		sails.controllers.conversacion.agregarmensaje( req.session.passport.user, req.param('plantilla'), req.param('conversacion'), req, res );
 	
+	},
+
+	nueva: function (req, res) {
+		sails.controllers.user.nuevahistoria( req.param('historia'), req, res);
 	},
 
 	agregarespuesta: function(req, res) {
