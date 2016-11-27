@@ -92,7 +92,7 @@ module.exports = {
 		var mensaje_base = false;
 
 		Plantilla.find({ identificador: mensaje }).populate('autor').populate('respuestas').populate('acciones').exec(function (err, plantilla) {
-		  if (err) {
+		  if (err || plantilla.length == 0 ) {
 		    // uh oh
 		    console.log('Se ha solicitado una plantilla que no existe. Revisar identificador.')
 		    return;
