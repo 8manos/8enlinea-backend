@@ -66,6 +66,11 @@ module.exports.routes = {
     action: 'unsubscribe'
   },
 
+  '/conversacion/agregarespuesta/:id': {
+    controller: 'conversacion',
+    action: 'agregarespuesta'
+  },
+
   '/login': {
     controller: 'home',
     action: 'login'

@@ -49,7 +49,7 @@ module.exports = {
       timed2 = setTimeout( function () {
         sails.log('emitiendo plantilla');
         sails.sockets.broadcast( socketId, { plantilla: plantilla[0], socketId: socketId });
-      }, 5000);
+      }, 2000);
       return res.json(plantilla);
     });
   }

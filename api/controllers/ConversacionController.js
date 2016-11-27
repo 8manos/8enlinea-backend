@@ -72,13 +72,13 @@ module.exports = {
 		});
 	},
 
-	agregar: function (req, res) {
-		sails.log( 'El usuario ' + req.session.passport.user + ', en la conversacion: '+ req.param('conversacion') +' ha solicitado agregar el mensaje: ', req.param('plantilla') );
+	agregarmensaje: function( usuario, mensaje, conversacion, req, res ){
+		sails.log( 'El usuario ' + usuario + ', en la conversacion: '+ conversacion +' ha solicitado agregar el mensaje: ', mensaje );
 		var plantilla_base = false;
 		var conversacion_base = false;
 		var mensaje_base = false;
 
-		Plantilla.find({ identificador: req.param('plantilla') }).populate('autor').populate('respuestas').populate('acciones').exec(function (err, plantilla) {
+		Plantilla.find({ identificador: mensaje }).populate('autor').populate('respuestas').populate('acciones').exec(function (err, plantilla) {
 		  if (err) {
 		    // uh oh
 		    console.log('Se ha solicitado una plantilla que no existe. Revisar identificador.')
@@ -87,7 +87,7 @@ module.exports = {
 
 		  plantilla_base = plantilla[0];
 
-		  Conversacion.findOne( req.param('conversacion') ).populate('respuestas').exec(function (err, conversacion){
+		  Conversacion.findOne( conversacion ).populate('respuestas').exec(function (err, conversacion){
 		    if (err) {
 		      return res.serverError(err);
 		    }
@@ -95,7 +95,7 @@ module.exports = {
 		      return res.notFound('Conversacion no encontrada');
 		    }
 		    conversacion_base = conversacion;
-
+		    console.log( 'Conversacion base: ', conversacion_base );
 		    console.log('Creando mensaje desde plantilla base: ', plantilla_base );
 		    Mensaje.create({
 			  	mensaje: plantilla_base.mensaje ,
@@ -133,38 +133,68 @@ module.exports = {
 			      	conversacion_base.save( function(err){
 			      		if (err) { console.log( 'Falló asignacion de mensaje a conversacion.'); }
 
-			      		if( conversacion_base.respuestas.length ){
-			      			for (var i = 0; i < conversacion_base.respuestas.length; i++) {
-			      				conversacion_base.respuestas.remove( conversacion_base.respuestas[i].id );
-			      			}
-		    				conversacion_base.save( function(err){
-		    					if (err) { console.log( 'Falló remocion de respuestas en conversacion.'); }       // Don't forget to handle your errors.
-		    					
-		    					if( plantilla_base.respuestas.length ){
-									for (var i = 0; i < plantilla_base.respuestas.length; i++) {
-										conversacion_base.respuestas.add( plantilla_base.respuestas[i].id );
+			      		var timed1 = setTimeout( function(){
+			      			sails.log( 'Cambiando estado de mensaje a: escribiendo');
+			      			Mensaje.update( mensaje_base.id , {estado:'escribiendo'} ).exec(function afterwards(err, updated){
+			      			  if (err) {
+			      			    return res.negotiate(err);
+			      			  }
+			      			  sails.log('Updated mensaje to estado: ' + updated[0].estado );
+			      			  sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { accion: 'nuevo_mensaje' });
+			      			  var timed2 = setTimeout(function(){
+			      			  	Mensaje.update( mensaje_base.id , {estado:'enviado'} ).exec(function afterwards(err, updated){
+				      			  if (err) {
+				      			    return res.negotiate(err);
+				      			  }
+				      			  sails.log('Updated mensaje to estado: ' + updated[0].estado );
+				      			  sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { accion: 'nuevo_mensaje' });
+				      			});
+			      			  }, plantilla_base.tiempo_escribiendo*1000 );
+			      			});
+			      		}, plantilla_base.tiempo_respuesta*1000 );
+
+			      		Conversacion.findOne( conversacion_base.id ).populate('respuestas').exec(function (err, conversacion ){
+							if (err) {
+								return res.serverError(err);
+							}
+							conversacion_base = conversacion;
+			      			console.log('Revisando si esta conversacion tiene respuestas: ', conversacion_base );
+				      		if( conversacion_base.respuestas.length > 0 ){
+				      			console.log('La conversacion ya tenía respuestas... Eliminando.')
+				      			for (var i = 0; i < conversacion_base.respuestas.length; i++) {
+				      				conversacion_base.respuestas.remove( conversacion_base.respuestas[i].id );
+				      			}
+			    				conversacion_base.save( function(err){
+			    					if (err) { console.log( 'Falló remocion de respuestas en conversacion.'); }       // Don't forget to handle your errors.
+			    					
+			    					if( plantilla_base.respuestas.length ){
+			    						console.log( 'Agregando opciones de respuesta desde plantilla.');
+										for (var i = 0; i < plantilla_base.respuestas.length; i++) {
+											conversacion_base.respuestas.add( plantilla_base.respuestas[i].id );
+										} 
 										conversacion_base.save( function(err){
 											if (err) { console.log( 'Falló asignación de respuestas en conversacion.'); }
-											sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { conversacion: conversacion_base, mensaje: mensaje_base });
+											sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { accion: 'nuevo_mensaje', conversacion: conversacion_base, mensaje: mensaje_base });
 			        						res.json({ mensaje: mensaje_base });
 										});
-									} 
-							    }
+								    }
 
-		    				});
-			      		} else if( plantilla_base.respuestas.length ){
-							for (var i = 0; i < plantilla_base.respuestas.length; i++) {
-								conversacion_base.respuestas.add( plantilla_base.respuestas[i].id );
+			    				});
+				      		} else if( plantilla_base.respuestas.length ){
+				      			console.log( 'No habia respuestas, agregando opciones de respuesta desde plantilla.');
+								for (var i = 0; i < plantilla_base.respuestas.length; i++) {
+									conversacion_base.respuestas.add( plantilla_base.respuestas[i].id );
+								} 
 								conversacion_base.save( function(err){
 									if (err) { console.log( 'Falló asignación de respuestas en conversacion.'); }
-									sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { conversacion: conversacion_base, mensaje: mensaje_base });
-	        						res.json({ mensaje: mensaje_base });
+									sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { accion: 'nuevo_mensaje', conversacion: conversacion_base, mensaje: mensaje_base });
+		    						res.json({ mensaje: mensaje_base });
 								});
-							} 
-					    } else {
-					    	sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { conversacion: conversacion_base, mensaje: mensaje_base });
-	        				res.json({ mensaje: mensaje_base });
-					    }
+						    } else {
+						    	sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { accion: 'nuevo_mensaje', conversacion: conversacion_base, mensaje: mensaje_base });
+		        				res.json({ mensaje: mensaje_base });
+						    }
+			      		});
 
 			        });
 			      });
@@ -174,6 +204,41 @@ module.exports = {
 		    });
 		  });
 
+		});
+	},
+
+	agregar: function (req, res) {
+
+		sails.controllers.conversacion.agregarmensaje( req.session.passport.user, req.param('plantilla'), req.param('conversacion'), req, res );
+	
+	},
+
+	agregarespuesta: function(req, res) {
+		console.log( "Intentando agregar respuesta " + req.param('destino') + " en conversacion", req.param('id')  );
+		var conversacion_base = false;
+
+		Conversacion.findOne( req.param('id') ).populate('mensajes').exec(function (err, conversacion){
+		    if (err) {
+		      return res.serverError(err);
+		    }
+		    if (!conversacion) {
+		      return res.notFound('Conversacion no encontrada');
+		    }
+		    conversacion_base = conversacion;
+		    console.log('Creando mensaje desde respuesta: ', req.param('texto') );
+		    Mensaje.create({
+			  	mensaje: req.param('texto') ,
+			  	estado: 'enviado',
+			  	autor: req.session.passport.user
+			}).exec(function ( err, mensaje ){
+				console.log('Mensaje creado desde respuesta: ', mensaje );
+				conversacion_base.mensajes.add( mensaje.id );
+			    conversacion_base.save( function(err){
+			    	sails.sockets.broadcast( conversacion_base.id, 'nuevo_mensaje', { accion: 'nuevo_mensaje' });
+					sails.controllers.conversacion.agregarmensaje( req.session.passport.user, req.param('destino'), req.param('id'), req, res );
+			    	res.json({ mensaje: 'respuesta agregada.' });
+			    });
+			});
 		});
 	}
 };

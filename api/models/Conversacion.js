@@ -11,6 +11,9 @@ module.exports = {
     nombre:{
       type: 'string'
     },
+    identificador:{
+      type: 'string'
+    },
     mensaje_inicial: {
       type: 'string',
       required: true

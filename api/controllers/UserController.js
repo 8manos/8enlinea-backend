@@ -28,6 +28,7 @@ module.exports = {
 				historia_base = historia[0];
 
 			  	Conversacion.create({
+			  		identificador: historia_base.identificador,
 			  		nombre: historia_base.nombre,
 			  		de_usuario: req.session.passport.user,
 			  		mensaje_inicial: historia_base.mensaje_inicial
