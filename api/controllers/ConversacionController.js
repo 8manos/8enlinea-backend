@@ -14,14 +14,16 @@ module.exports = {
 		
 		Conversacion.findOne( req.param('id') ).populate('mensajes').populate('respuestas').populate('usuarios').populate('alternativas').exec(function (err, conversacion) {
 		  if (err) { return; }
-      		data.conversacion = conversacion;
-
-		  	if (req.wantsJSON) {
+		  	data.conversacion = conversacion;
+		  	for (var i = 0; i < conversacion.mensajes.length; i++) {
+				mensajes_array.push( conversacion.mensajes[i].id ); 
+			}
+			Mensaje.find().where({id: mensajes_array}).populate('autor').exec(function (err, mensajes) {
+		  		
+		  		data.conversacion.mensajes = mensajes;
 				return res.json( {data} );
-			}
-			else {
-				return res.view( {data} );
-			}
+
+		    });
 
 		});
 	},
@@ -45,7 +47,7 @@ module.exports = {
 			for (var i = 0; i < conversacion.mensajes.length; i++) {
 				mensajes_array.push( conversacion.mensajes[i].id ); 
 			}
-			Mensaje.find().where({id: mensajes_array}).populate('acciones').exec(function (err, mensajes) {
+			Mensaje.find().where({id: mensajes_array}).populate('autor').populate('acciones').exec(function (err, mensajes) {
 		        res.json( mensajes );
 		    });
 		});
