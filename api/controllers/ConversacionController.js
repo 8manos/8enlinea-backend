@@ -98,6 +98,7 @@ module.exports = {
 		    return;
 		  }
 
+		  console.log('Se encontró y usará la plantilla: ', plantilla );
 		  plantilla_base = plantilla[0];
 
 		  Conversacion.findOne( conversacion ).populate('respuestas').exec(function (err, conversacion){
