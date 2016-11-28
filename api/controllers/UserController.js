@@ -55,6 +55,7 @@ module.exports = {
 		  	Conversacion.create({
 		  		identificador: historia_base.identificador,
 		  		nombre: historia_base.nombre,
+		  		image: historia_base.image,
 		  		de_usuario: req.session.passport.user,
 		  		mensaje_inicial: historia_base.mensaje_inicial
 		  	}).exec(function (err, conversacion){

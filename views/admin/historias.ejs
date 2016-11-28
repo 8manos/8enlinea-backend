@@ -20,6 +20,11 @@
 		</div>
 
 		<div class="form-group">
+			<label for="image"><%= __('Imagen') %></label>
+			<input class="form-control" type="text" name="image" id="image" required>
+		</div>
+
+		<div class="form-group">
 			<label for="mensaje_inicial"><%= __('Mensaje inicial') %></label>
 			<input class="form-control" type="text" name="mensaje_inicial" id="mensaje_inicial" placeholder="ej: saludo_1">
 		</div>
@@ -46,6 +51,7 @@
 				<td><input type="checkbox" name="select_all"></td>
 				<td><%= __('Identificador') %></td>
 				<td><%= __('Nombre') %></td>
+				<td><%= __('Imagen') %></td>
 				<td><%= __('Mensaje Inicial') %></td>
 				<td><%= __('Usuario Inicial') %></td>
 			</tr>
@@ -61,6 +67,7 @@
 						</small>		
 					</td>
 					<td><%= data.historias[i].nombre || "no definido" %></td>
+					<td><%= data.historias[i].image || "" %></td>
 					<td><%= data.historias[i].mensaje_inicial || "no definido" %></td>
 					<td><%= data.historias[i].usuario.username || "sin autor" %></td>
 				</tr>

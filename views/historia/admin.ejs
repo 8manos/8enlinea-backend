@@ -24,6 +24,11 @@
 		</div>
 
 		<div class="form-group">
+			<label for="image"><%= __('Imagen') %></label>
+			<input class="form-control" type="text" name="image" id="image" value="<%= data.historia.image || '' %>">
+		</div>
+
+		<div class="form-group">
 			<label for="mensaje_inicial"><%= __('Mensaje Inicial') %></label>
 			<input class="form-control" type="text" name="mensaje_inicial" id="mensaje_inicial" value="<%= data.historia.mensaje_inicial || '' %>">
 		</div>
