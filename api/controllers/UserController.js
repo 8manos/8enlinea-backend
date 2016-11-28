@@ -96,6 +96,25 @@ module.exports = {
 	  	        });
 		  	});
 	    });
+	},
+
+	reset: function( req, res ){
+		sails.log('Eliminando todas las conversaciones del usuario.');
+		var conversaciones_array = [];
+		User.findOne( req.session.passport.user ).populate('conversaciones').exec(function (err, user){
+			for (var i = 0; i < user.conversaciones.length; i++) {
+				conversaciones_array.push( user.conversaciones[i].id );
+			}
+			Conversacion.destroy({
+			  id: conversaciones_array
+			}).exec(function (err){
+			  if (err) {
+			    return res.negotiate(err);
+			  }
+			  sails.log('Se han eliminado todas las conversaciones del usuario.');
+			  return res.json({ ok:true });
+			});
+		});
 	}
 };
 
