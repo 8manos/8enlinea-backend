@@ -16,6 +16,9 @@ module.exports = {
   		type: 'string',
   		required: true
   	},
+    image: {
+        type: 'string'
+    },
   	mensaje_inicial: {
   		type: 'string',
   		required: true

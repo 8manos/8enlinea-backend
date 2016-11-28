@@ -36,6 +36,11 @@ module.exports.routes = {
   	controller: 'home'
   },
 
+  '/ping': {
+    controller: 'home',
+    action: 'ping'
+  },
+
   '/intro': {
     controller: 'home',
     action: 'subscribeToIntro'
@@ -53,6 +58,11 @@ module.exports.routes = {
 
   '/admin/historia/:id': {
     controller: 'historia',
+    action: 'admin'
+  },
+
+  '/admin/user/:id': {
+    controller: 'user',
     action: 'admin'
   },
 

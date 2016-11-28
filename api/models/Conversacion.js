@@ -11,6 +11,9 @@ module.exports = {
     nombre:{
       type: 'string'
     },
+    image: {
+        type: 'string'
+    },
     identificador:{
       type: 'string'
     },

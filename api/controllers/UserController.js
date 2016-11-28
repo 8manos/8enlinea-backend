@@ -6,6 +6,21 @@
  */
 
 module.exports = {
+	admin: function( req, res ){	
+		User.findOne( req.param('id') ).exec(function (err, usuario) {
+		  if (err) { return; }
+		    var data = new Object();
+      		data.usuario = usuario;
+		  	if (req.wantsJSON) {
+				return res.json( {data} );
+			}
+			else {
+				return res.view( {data} );
+			}
+
+		});
+	},
+
 	conversaciones: function( req, res ){
 		sails.log('Trayendo conversaciones del usuario..', req.session );
 		User.findOne( req.session.passport.user ).populate('conversaciones').exec(function (err, user){

@@ -1,0 +1,43 @@
+<%- include ../admin/partials/header.ejs %>
+
+<div class="breadcrumb clearfix">
+	<a href="/admin">Admin</a> / <a href="/admin/usuarios"><%= __('Usuarios') %></a>	
+</div>
+
+<section id="admin-form" class="panel usuario_new visible">
+	<h2><%= __('Editar usuario') %>: <%= data.usuario.username %></h2>
+
+	<form method="PUT" action="/user/<%= data.usuario.id %>" id="form_usuario_new" class="ajax-form">
+
+		<input type="hidden" id="id" name="id" value=<%= data.usuario.id %>>
+
+		<div class="form-group">
+			<label for="identificador"><%= __('Usuario') %></label>
+			<input disabled class="form-control" type="text"  name="identificador" id="identificador" required value="<%= data.usuario.username %>">
+		</div>
+
+		<div class="form-group">
+			<label for="email"><%= __('Email') %></label>
+			<input disabled class="form-control" type="text"  name="email" id="mensaje_inicial" value="<%= data.usuario.email || '' %>">
+		</div>
+
+		<div class="form-group">
+			<label for="name"><%= __('Nombre') %></label>
+			<input class="form-control" type="text" name="name" id="name" value="<%= data.usuario.name || '' %>">
+		</div>
+
+		<div class="form-group">
+			<label for="image"><%= __('Imagen') %></label>
+			<input class="form-control" type="text" name="image" id="image" value="<%= data.usuario.image || '' %>">
+		</div>
+
+		<div class="form-group">
+			<label for="status"><%= __('Status') %></label>
+			<input class="form-control" type="text" name="status" id="status" value="<%= data.usuario.status || '' %>">
+		</div>
+
+		<div class="form-group">
+			<input class="btn btn-primary" type="submit" name="submit" value="<%= __('Editar') %>">
+		</div>
+	</form>
+</section>

@@ -77,6 +77,7 @@ module.exports.policies = {
       'CriteriaPolicy'
     ],
     'create' : true,
+    'findOne' : true,
     me: ['passport']
   },
   ConversacionController: {
@@ -111,7 +112,8 @@ module.exports.policies = {
 
   HomeController: {
     'index': true,
-    'subscribeToIntro': true
+    'subscribeToIntro': true,
+    'ping': true
   },
 
   AdminController: {

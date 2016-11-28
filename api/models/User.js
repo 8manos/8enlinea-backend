@@ -9,6 +9,9 @@ _.merge(exports, {
     name: {
     	type: 'string'
     },
+    image: {
+        type: 'string'
+    },
     status: {
         type: 'string'
     },

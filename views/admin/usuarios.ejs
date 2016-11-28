@@ -44,7 +44,7 @@
 				<td><%= __('Nombre') %></td>
 				<td><%= __('Email') %></td>
 				<td><%= __('Status') %></td>
-				<td><%= __('Mensajes') %></td>
+				<td><%= __('Imagen') %></td>
 				<td><%= __('Fotos') %></td>
 				<td><%= __('Conversaciones') %></td>
 			</tr>
@@ -53,11 +53,16 @@
 			<% for(var i=0; i<data.usuarios.length; i++) { %>
 				<tr>
 					<td><input type="checkbox" name="<%= data.usuarios[i].id %>"></td>
-					<td><%= data.usuarios[i].username %></td>
+					<td>
+						<%= data.usuarios[i].username %>
+						<small>
+							( <a href="user/<%= data.usuarios[i].id %>" class="editar_usuario" data-id="<%= data.usuarios[i].id %>"><%= __('Editar') %></a> )
+						</small>
+					</td>
 					<td><%= data.usuarios[i].name %></td>
 					<td><%= data.usuarios[i].email %></td>
 					<td><%= data.usuarios[i].status || req.__('Sin estado') %></td>
-					<td><%= data.usuarios[i].conteo_mensajes || '0' %></td>
+					<td><%= data.usuarios[i].image || '' %></td>
 					<td><%= data.usuarios[i].conteo_fotos || '0' %></td>
 					<td><%= data.usuarios[i].conversaciones.length || '0' %></td>
 				</tr>

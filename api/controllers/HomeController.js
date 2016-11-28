@@ -18,6 +18,13 @@ module.exports = {
     res.view('403');
   },
 
+  ping: function(req, res) {
+    if (!req.isSocket) {
+      return res.badRequest();
+    }
+    return res.json( {ok: true} );
+  },
+
   subscribeToIntro: function(req, res) {
     if (!req.isSocket) {
       return res.badRequest();
