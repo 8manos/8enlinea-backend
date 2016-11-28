@@ -36,6 +36,25 @@ module.exports = {
 		  }
 		});
 	},
+
+	conteos: function( req, res ){
+		sails.log('Trayendo conteos del usuario..', req.session );
+		var data = new Object();
+
+		User.findOne( req.session.passport.user ).populate('conversaciones').populate('contactos').populate('mensajes').exec(function (err, user){
+		  if (err) {
+		    return res.serverError(err);
+		  }
+
+		  data.mensajes = user.mensajes.length;
+		  data.contactos = user.contactos.length;
+		  data.conversaciones = user.conversaciones.length;
+
+		  return res.json(data);
+		  
+		});
+	},
+
 	nuevahistoria: function( historia, req, res ){
 		if (!req.isSocket) {
 	      return res.badRequest();
