@@ -14,6 +14,10 @@ module.exports = {
 		
 		Conversacion.findOne( req.param('id') ).populate('mensajes').populate('respuestas').populate('usuarios').populate('alternativas').exec(function (err, conversacion) {
 		  if (err) { return; }
+		  if( typeof(conversacion) == 'undefined' ) {
+		  	console.log('Se ha solicitado una conversacion que no existe.');
+		  	return;
+		  }
 		  	data.conversacion = conversacion;
 		  	for (var i = 0; i < conversacion.mensajes.length; i++) {
 				mensajes_array.push( conversacion.mensajes[i].id ); 

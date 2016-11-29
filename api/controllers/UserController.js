@@ -28,7 +28,7 @@ module.exports = {
 		    return res.serverError(err);
 		  }
 		  if( user.conversaciones.length > 0 ){
-		  	sails.log( "Conversaciones encontradas: ", user.conversaciones );
+		  	sails.log( "Conversaciones encontradas: ", user.conversaciones.length );
 		  	return res.json(user.conversaciones);
 		  }else{
 		  	var historia_base = false;
