@@ -92,7 +92,7 @@ function eliminar_accion( id ){
 			body.text('');
 			content += '<table class="table table-striped table-bordered table-hover"><thead><tr><td>Tipo</td><td>Texto</td><td>Destino</td><td>Admin</td></tr></thead><tbody>';
 			$.each( data , function( i, item ){
-				content += '<tr><td>'+ data[i].tipo +'</td><td>'+ data[i].texto +'</td><td>'+ data[i].destino +'</td><td><a href="#" class="eliminar_respuesta" onclick="eliminar_respuesta( "'+ data[i].id +'" );">(Eliminar)</a></td></tr>';
+				content += '<tr><td>'+ data[i].tipo +'</td><td>'+ data[i].texto +'</td><td>'+ data[i].destino +'</td><td><a href="#" class="eliminar_respuesta" onclick="eliminar_respuesta('+ parseInt(data[i].id) +');">(Eliminar)</a></td></tr>';
 			});
 			content += '</tbody></table>';
 			body.append( $.parseHTML(content) );
@@ -116,7 +116,7 @@ function eliminar_accion( id ){
 			body.text('');
 			content += '<table class="table table-striped table-bordered table-hover"><thead><tr><td>Tipo</td><td>Parametro</td><td>Valor</td><td>Admin</td></tr></thead><tbody>';
 			$.each( data , function( i, item ){
-				content += '<tr><td>'+ data[i].tipo +'</td><td>'+ data[i].parametro +'</td><td>'+ data[i].valor +'</td><td><a href="#" class="eliminar_accion" onclick="eliminar_accion( '+ data[i].id +' );">(Eliminar)</a></td></tr>';
+				content += '<tr><td>'+ data[i].tipo +'</td><td>'+ data[i].parametro +'</td><td>'+ data[i].valor +'</td><td><a href="#" class="eliminar_accion" onclick="eliminar_accion( '+ parseInt(data[i].id) +' );">(Eliminar)</a></td></tr>';
 			});
 			content += '</tbody></table>';
 			body.append( $.parseHTML(content) );
